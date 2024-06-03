@@ -7,9 +7,9 @@ const HomePage = () => {
     <div className='h-screen'>
       <h1 className='text-center'>Chat App</h1>      
       <div className="flex">
-        <LeftSection/>
+        <LeftSection/>        
         <RightSection/>
-      </div>
+     </div>
     </div>
   )
 }
