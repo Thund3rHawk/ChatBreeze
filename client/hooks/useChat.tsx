@@ -1,5 +1,4 @@
 import { socketContext } from "@/context/socketProvider";
-import { error } from "console";
 import { useContext } from "react"
 
 const useChat =()=>{
