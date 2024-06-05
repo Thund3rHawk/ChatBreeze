@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import React from "react";
 import {
   Form,
@@ -20,7 +20,10 @@ const formSchema = z.object({
 
 const ChatArea = () => {
   const { chat, setMessage } = useChat();
-
+  let checkChat = false;
+  if (chat.length != 0) {
+    checkChat = true;
+  }
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -35,14 +38,22 @@ const ChatArea = () => {
   return (
     <>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="flex  bottom-0">
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="absolute flex bottom-10 justify-between"
+        >
           <FormField
             control={form.control}
             name="message"
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input placeholder="Enter Message" {...field} type="text" />
+                  <Input
+                    placeholder="Enter Message"
+                    {...field}
+                    type="text"
+                    className="w-[53vw] ms-5"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -51,16 +62,24 @@ const ChatArea = () => {
           <Button type="submit">Send</Button>
         </form>
       </Form>
-
-      <div className="">
-        {chat.map((payload, index) => {
-          return (
-            <div key={index} className="border border-black rounded-xl">
-              <p>{payload}</p>
-            </div>
-          );
-        })}
-      </div>
+      {checkChat ? (
+        <div className="overflow-auto h-[80vh] no-scrollbar p-3">
+          {chat.map((payload, index) => {
+            return (
+              <div
+                key={index}
+                className="border bg-slate-600 border-black rounded-3xl p-3 w-2/5 mx-3"
+              >
+                <p>{payload}</p>
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <div className="flex justify-center items-center h-[70vh]">
+          Chats Will appear here
+        </div>
+      )}
     </>
   );
 };

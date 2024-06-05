@@ -7,8 +7,9 @@ import useTheme from "@/hooks/useTheme";
 
 export default function Home() {
   const {theme} = useTheme();
+  
   return (
-      <div className={`${theme}`}>
+      <div className={`${theme} h-screen`}>
         <Navbar/>
         <HomePage/>
       </div>

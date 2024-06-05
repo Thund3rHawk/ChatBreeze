@@ -4,8 +4,8 @@ import RightSection from './shared/RightSection'
 
 const HomePage = () => {
   return (
-    <div className='h-screen'>
-      <div className="flex">
+    <div className=''>
+      <div className="flex justify-between">
         <LeftSection/>        
         <RightSection/>
      </div>
