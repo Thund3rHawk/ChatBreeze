@@ -15,7 +15,7 @@ const SignUp = () => {
             Have already an account
             <button
               onClick={() => {
-                router.push("./login");
+                router.push("./signin");
               }}
             >
               Login
