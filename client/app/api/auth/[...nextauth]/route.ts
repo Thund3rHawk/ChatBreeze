@@ -6,7 +6,7 @@ import GoogleProvider from "next-auth/providers/google";
 
 export const authOptions = {
     // Configure one or more authentication providers
-    secret:process.env.NEXT_PUBLIC_NEXTAUTH_SECRET ,
+    secret:process.env.NEXT_PUBLIC_NEXTAUTH_SECRET,
     providers: [
         CredentialsProvider({
             // The name to display on the sign in form (e.g. "Sign in with...")
@@ -36,8 +36,8 @@ export const authOptions = {
             }
         }),
         GoogleProvider({
-            clientId: process.env.GOOGLE_CLIENT_ID as string,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET as string
+            clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string,
+            clientSecret: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_SECRET as string
         })
         // ...add more providers here
     ],
