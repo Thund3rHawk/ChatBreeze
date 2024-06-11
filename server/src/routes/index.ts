@@ -13,3 +13,5 @@ router.route('/signup').post(signUp);
 
 // SignOut Route
 router.route('/signout').post(signOut);
+
+export {router};
