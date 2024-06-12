@@ -1,14 +1,11 @@
 import { Request, Response } from "express";
 import { asyncHandler } from "../utils/asyncHandler";
-import {PrismaClient} from '@prisma/client'
 import bcrypt from 'bcrypt'
 import randomstring from 'randomstring'
 import { sendEmail } from "../utils/nodemailerConfig";
+import prisma from "../db";
 
-
-const prisma = new PrismaClient();
-
-const otp = randomstring.generate({
+export const OTP = randomstring.generate({
     length: 6,
     charset: ['numeric']
 });
@@ -34,17 +31,16 @@ const signUp = asyncHandler(async (req:Request,res:Response)=>{
                         password: hash
                     }
                 })
-                sendEmail(email,otp);
-
+                sendEmail(email,OTP);
                 console.log (user);
             });
         })
- 
+        res.send ("User Created Successfuly")
 
     } catch (error) {
+        res.send (error);
         console.log ("Prisma Error: ",error)
     }
-
 })
 
 export {signUp};

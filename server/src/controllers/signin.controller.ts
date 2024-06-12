@@ -3,7 +3,8 @@ import { Request, Response } from "express";
 
 
 const signIn = asyncHandler(async (req:Request,res:Response)=>{
-    const {username, password, email} = req.body;
+    const {email, password} = req.body;
+    // First we have to check the email, if it is verified or not then allow for login/signin
 
 })
 

@@ -6,7 +6,6 @@ dotenv.config();
 const userEmail = process.env.AUTH_EMAIL;
 const password = process.env.AUTH_EMAIL_PASS;
 
-
 export const transporter = nodemailer.createTransport ({
     host: 'smtp.gmail.com',  
     port: 465,
@@ -34,8 +33,8 @@ export function sendEmail(email:string, otp: string) {
     const mailOptions = {
         from: userEmail, 
         to: email,
-        subject: 'Varify OTP',
-        html: `<p>OTP for ChatBreeze <b>${otp}</b> </p>`
+        subject: 'Verify OTP',
+        html: `<p>OTP for ChatBreeze is <b>${otp}</b> </p>`
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
