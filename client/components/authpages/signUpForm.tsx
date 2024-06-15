@@ -13,6 +13,9 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import axios from 'axios'
+import { useToast } from '../ui/use-toast'
+import { useRouter } from 'next/navigation'
 
 const formSchema = z.object({
   username: z.string().min(4).max(50),
@@ -21,21 +24,34 @@ const formSchema = z.object({
 })
 
 const SignUpForm = () => {
+  const { toast } = useToast();
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      username: "",
       email: "",
       password: ""
     },
   })
- 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    // console.log(values)
+  
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const data = {
+      username: values.username,
+      password: values.password,
+      email: values.email,
+    }
+    const res =await axios.post ('http://localhost:8080/signup',data);
+    toast({
+      description: `${res.data.description} and ${res.data.otp}`,
+
+    })
+    router.push (`/authPage/${res.data.id}`);
+    form.reset();
   }
+
 
   return (
     <div className='m-10'>

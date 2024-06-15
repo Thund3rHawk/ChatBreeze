@@ -11,7 +11,7 @@ const SignUp = () => {
       <div className="w-screen h-[80vh] flex justify-center items-center">
         <div className="border border-black rounded-2xl h-[50vh] w-[40vw] ">
           <SignUpForm />
-          <div>
+          <div className="text-center">
             Have already an account
             <button
               onClick={() => {

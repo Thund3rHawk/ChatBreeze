@@ -3,12 +3,12 @@ import { asyncHandler } from "../utils/asyncHandler";
 import { OTP } from "./signup.controller";
 
 const verifyOtp = asyncHandler(async (req, res) => {
-    const { email, otp } = req.body;
+    const { id, otp } = req.body;
     try {
         if (OTP === otp) {
             await prisma.user.update({
                 where: {
-                    email: email,
+                    id: id,
                 },
                 data: {
                     verified: true,

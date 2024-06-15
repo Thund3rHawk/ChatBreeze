@@ -8,18 +8,10 @@ import { redirect } from "next/navigation";
 export default function Home() {
   const { theme } = useTheme();
 
-  const { data: session, status } = useSession()
-
-  if (status === "authenticated") {
-    return (
-      <div className={`${theme} h-screen`}>
-        <Navbar />
-        <HomePage />
-      </div>
-    );
-  }
-
   return (
-    redirect('/api/auth/signin')
-  )  
+    <div className={`${theme} h-screen`}>
+      <Navbar />
+      <HomePage />
+    </div>
+  );
 }

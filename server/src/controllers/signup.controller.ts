@@ -32,10 +32,14 @@ const signUp = asyncHandler(async (req:Request,res:Response)=>{
                     }
                 })
                 sendEmail(email,OTP);
-                console.log (user);
+                const userID = user.id;
+                res.send ({
+                    description: "User Registered successfully.",
+                    otp: `OTP is ${OTP}`,
+                    id: `${userID.trim()}`,
+                })
             });
         })
-        res.send ("User Created Successfuly")
 
     } catch (error) {
         res.send (error);

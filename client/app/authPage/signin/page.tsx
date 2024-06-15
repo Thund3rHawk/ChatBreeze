@@ -16,7 +16,7 @@ const Login = () => {
       <div className="w-screen h-[80vh] flex justify-center items-center">
         <div className="border border-black rounded-2xl h-[50vh] w-[40vw] ">
             <LoginForm/>
-          <div>Haven't an account
+          <div className="text-center">Haven't an account
             <button onClick={()=>{router.push('./signup')}}>SignUp</button>
           </div>
         </div>
