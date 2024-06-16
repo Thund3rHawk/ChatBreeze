@@ -23,6 +23,7 @@ import { toast } from "@/components/ui/use-toast";
 import axios from "axios";
 import { ToastAction } from "@radix-ui/react-toast";
 import { useRouter } from "next/navigation";
+import { endpoints } from "@/utils/endpoints";
 
 const FormSchema = z.object({
   pin: z.string().min(6, {
@@ -45,7 +46,7 @@ function Verify({ params }: { params: { slug: string } }) {
       otp: data.pin,
     };
     try {
-      const res =await axios.post ('http://localhost:8080/verify',postData);
+      const res =await axios.post (endpoints.verifyOtpEndpoint,postData);
 
       toast({
         title: "You submitted the following values:",

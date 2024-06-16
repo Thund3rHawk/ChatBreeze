@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input"
 import axios from 'axios'
 import { useToast } from '../ui/use-toast'
 import { useRouter } from 'next/navigation'
+import { endpoints } from '@/utils/endpoints'
 
 const formSchema = z.object({
   username: z.string().min(4).max(50),
@@ -43,12 +44,12 @@ const SignUpForm = () => {
       password: values.password,
       email: values.email,
     }
-    const res =await axios.post ('http://localhost:8080/signup',data);
+    const res =await axios.post (endpoints.signupEndpoint,data);
     toast({
       description: `${res.data.description} and ${res.data.otp}`,
 
     })
-    router.push (`/authPage/${res.data.id}`);
+    router.push (`/authPage/verify/${res.data.id}`);
     form.reset();
   }
 

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -13,6 +13,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import axios from "axios";
+import { createCookie } from "@/utils/createCookie";
+import { useRouter } from "next/navigation";
+import { endpoints } from "@/utils/endpoints";
+import { useToast } from "../ui/use-toast";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -20,6 +25,16 @@ const formSchema = z.object({
 });
 
 const loginForm = () => {
+  const router = useRouter();
+  const { toast } = useToast();
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [userId, setUserId] = useState("");
+
+  useEffect(() => {
+    createCookie(loggedIn, userId);
+    if (loggedIn) router.push(`/home/${userId}`);
+  }, [loggedIn]);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -28,11 +43,42 @@ const loginForm = () => {
     },
   });
 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    // console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const data = {
+      email: values.email,
+      password: values.password,
+    };
+
+    try {
+      const res = await axios.post(endpoints.singinEndpoint, data);
+      if (res.data.message === "Login Successful") {
+        toast({
+          title: "Login Successful",
+        });
+        setLoggedIn(true);
+        setUserId(res.data.userId);
+      } else if (res.data === "Wrong Password") {
+        toast({
+          variant: "destructive",
+          title: res.data,
+          description: "Please enter correct password",
+        });
+      } else if (res.data === "User does not exist") {
+        toast({
+          variant: "destructive",
+          title: res.data,
+          description: "Plase SignIn first!",
+        });
+      } else if (res.data === "Verify user then Login") {
+        toast({
+          variant: "destructive",
+          title: "Email is not verified.",
+          description: "Plase verify your email.",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (

@@ -14,3 +14,8 @@ export type addUserContextType = {
     userCard: React.ReactNode[],
     setUserCard: React.Dispatch<SetStateAction<React.ReactNode[]>>
 }
+
+export type authContextType = {
+    loggedIn: boolean,
+    setStatus: React.Dispatch<SetStateAction<string>>,
+}

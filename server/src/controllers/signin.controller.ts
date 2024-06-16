@@ -12,7 +12,6 @@ const signIn = asyncHandler(async (req:Request,res:Response)=>{
                 email: email,
             }
         })
-        console.log (user);
         if (!user){
             res.send ("User does not exist");
         }
@@ -26,7 +25,10 @@ const signIn = asyncHandler(async (req:Request,res:Response)=>{
                     res.send ("Wrong Password");
                 }
                 else {
-                    res.send ("Login Successfull");
+                    res.send ({
+                       message: "Login Successful",
+                       userId: user.id,
+                    });
                 }
             });
         }
