@@ -15,6 +15,8 @@ app.use(cors());
 app.use ('/', router);
 app.use ('/signin', router);
 app.use ('/verify', router);
+app.use ('/adduser', router);
+app.use ('/getContacts', router);
 
 const server = app.listen (port , ()=>{
     console.log (`Server is listening on port:${port}`);

@@ -17,6 +17,10 @@ import { DialogFooter } from "../ui/dialog";
 import useAddUser from "@/hooks/useAddUser";
 import UserCard from "./UserCard";
 import { DialogClose } from "@radix-ui/react-dialog";
+import { endpoints } from "@/utils/endpoints";
+import axios from "axios";
+import { getCookiesData } from "@/utils/getCookiesData";
+import { useToast } from "../ui/use-toast";
 
 const formSchema = z.object({
   username: z.string().min(2).max(50),
@@ -25,6 +29,7 @@ const formSchema = z.object({
 
 const AddUserForm = () => {
   const { userCard, setUserCard } = useAddUser();
+  const { toast } = useToast()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -34,10 +39,32 @@ const AddUserForm = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    const addUserCard = [...userCard, <UserCard name={values.username} />];
-    setUserCard(addUserCard);
-    form.reset();
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const data = {
+      userId: await getCookiesData(),
+      email: values.email,
+      name: values.username
+    }
+
+    try {
+      const res = await axios.post (endpoints.addUser,data);
+      if (res.data === 'Invalid Email'){
+        toast({
+          variant: "destructive",
+          title: res.data,
+          description: "Enter a existing email",
+        })
+        return;
+      }
+      const addUserCard = [...userCard, <UserCard name={values.username} />];
+      setUserCard(addUserCard);
+      toast({
+        title: "User Added Successfully",
+      })
+      form.reset();
+    } catch (error) {
+      console.log (error);
+    }
   }
 
   return (

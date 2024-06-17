@@ -1,13 +1,31 @@
+import UserCard from "@/components/shared/UserCard";
 import { addUserContextType } from "@/types";
-import React, { createContext, useState } from "react";
+import { endpoints } from "@/utils/endpoints";
+import { getCookiesData } from "@/utils/getCookiesData";
+import axios from "axios";
+import React, { createContext, useEffect, useState } from "react";
 
 export const addUserContext = createContext<addUserContextType>({userCard:[], setUserCard: ()=>{}});
+
 
 const addUserProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [userCard, setUserCard] = useState<React.ReactNode[]>([]);
-  //Here we fetch the users from db and update the state usercard;
+  useEffect(()=>{
+    async function fetchData (){
+      const userId = await getCookiesData();
+      const data = await axios.post (endpoints.getContactDetails,userId);
+      const user = (data.data);
+      
+      const updateUserCard = user.map((item:any)=>{
+        const name = item.name
+        return <UserCard name = {name}/>
+      })
+      setUserCard (updateUserCard);
+    }
+    fetchData();
+  },[])
 
   return (
     <addUserContext.Provider value={{ userCard, setUserCard }}>
