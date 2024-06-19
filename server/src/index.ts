@@ -25,4 +25,3 @@ const server = app.listen (port , ()=>{
 const newServer = new SocketService();
 newServer.io.attach (server);
 newServer.sendMessage();
-
