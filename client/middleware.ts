@@ -15,7 +15,7 @@ export function middleware(request: NextRequest) {
     const rootDir = path === '/';
 
 
-    console.log (userId);
+    // console.log (userId);
     if ((publicPath && isLoggedIn === 'true') || (!homePath && rootDir && isLoggedIn === 'true')){
         return NextResponse.redirect(new URL(`/home/${userId}`, request.url))
     }

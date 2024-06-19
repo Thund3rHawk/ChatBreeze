@@ -16,9 +16,9 @@ export class SocketService {
     public sendMessage(){
         const io = this.io;
         io.on ("connection", (socket)=>{
-            socket.on("chat", (payload)=>{
+            socket.on("chat", (payload,)=>{
                 console.log ("connection established", payload);
-                io.emit ("chat", payload);
+                io.to(payload.userId).emit ("chat", payload.message);
             })
         })
     }

@@ -4,7 +4,6 @@ import prisma from "../db";
 
 const addUser = asyncHandler(async (req: Request, res: Response) => {
     const { userId, email, name } = req.body;
-    // here have to check the email is valid or not and then i can add the user
     try {
         const checkEmail = await prisma.user.findUnique({ 
             where: {
@@ -17,7 +16,7 @@ const addUser = asyncHandler(async (req: Request, res: Response) => {
             return;
         }
         // user can add a email in its contact once have to write this logic
-        await prisma.contact.create({
+        const user = await prisma.contact.create({
             data: {
                 email: email,
                 name: name,
@@ -28,7 +27,10 @@ const addUser = asyncHandler(async (req: Request, res: Response) => {
                 }
             }
         })
-        res.send("user added successfully")
+        res.send({
+            message: "user added successfully",
+            userId: user.id,
+        })
     } catch (error) {
         res.send("adding user error: " + error);
         console.log(error);

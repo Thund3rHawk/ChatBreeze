@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Form,
   FormControl,
@@ -13,6 +13,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import useChat from "@/hooks/useChat";
+import useUserChat from "@/hooks/useUserChat";
 
 const formSchema = z.object({
   message: z.string().max(500),
@@ -20,6 +21,13 @@ const formSchema = z.object({
 
 const ChatArea = () => {
   const { chat, setMessage } = useChat();
+  const {userId, setUserId} = useUserChat();
+
+  // Here we fetch the messages through the api while loading first, using the userId taken by chatProvider.
+  // useEffect(()=>{
+
+  // },[]);
+
   let checkChat = false;
   if (chat.length != 0) {
     checkChat = true;
@@ -35,8 +43,22 @@ const ChatArea = () => {
     setMessage(values.message);
     form.reset();
   }
+
+  const closeChat =()=>{
+    setUserId('');
+  }
+  
+  if (userId === ''){
+    return (
+      <div>
+        Chats will appear here.
+      </div>
+    )
+  }
+  
   return (
-    <>
+    <>  
+      <Button className="absolute right-11 rounded-3xl" onClick={closeChat}>X</Button>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -77,7 +99,7 @@ const ChatArea = () => {
         </div>
       ) : (
         <div className="flex justify-center items-center h-[70vh]">
-          Chats Will appear here
+          Chats Will appear here {userId}
         </div>
       )}
     </>

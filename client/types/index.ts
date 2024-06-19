@@ -19,3 +19,8 @@ export type authContextType = {
     loggedIn: boolean,
     setStatus: React.Dispatch<SetStateAction<string>>,
 }
+
+export type chatProviderType = {
+    userId: string,
+    setUserId: React.Dispatch<SetStateAction<string>>,
+}

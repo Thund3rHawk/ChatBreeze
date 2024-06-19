@@ -40,13 +40,13 @@ const AddUserForm = () => {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const data = {
-      userId: await getCookiesData(),
-      email: values.email,
-      name: values.username
-    }
-
+    
     try {
+      const data = {
+        userId: await getCookiesData(),
+        email: values.email,
+        name: values.username
+      }
       const res = await axios.post (endpoints.addUser,data);
       if (res.data === 'Invalid Email'){
         toast({
@@ -56,7 +56,7 @@ const AddUserForm = () => {
         })
         return;
       }
-      const addUserCard = [...userCard, <UserCard name={values.username} />];
+      const addUserCard = [...userCard, <UserCard name={values.username} userId={res.data.userId}/>];
       setUserCard(addUserCard);
       toast({
         title: "User Added Successfully",

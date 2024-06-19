@@ -7,7 +7,7 @@
     "build": "tsc",
     "start": "ts-node src/index.ts"
   },
-  "author": "",
+  "author": "Swadhin Paul",
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^5.15.0",
