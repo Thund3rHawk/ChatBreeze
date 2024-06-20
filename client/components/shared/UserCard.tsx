@@ -1,6 +1,7 @@
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
  import useUserChat from "@/hooks/useUserChat";
+import useChat from "@/hooks/useChat";
 
 
 interface props{
@@ -15,7 +16,7 @@ const UserCard:React.FC<props> = ({name, userId}) => {
   }
 
 
-  return (
+  return (    
     <div className="border border-green-500 flex p-3 rounded-2xl my-2">
       <div className="mx-6">
         <Avatar>

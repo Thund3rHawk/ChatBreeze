@@ -20,6 +20,7 @@ const addUser = asyncHandler(async (req: Request, res: Response) => {
             data: {
                 email: email,
                 name: name,
+                contactId: checkEmail.id,
                 post: {
                     connect: {
                         id: userId
@@ -29,7 +30,7 @@ const addUser = asyncHandler(async (req: Request, res: Response) => {
         })
         res.send({
             message: "user added successfully",
-            userId: user.id,
+            userId: user.contactId,
         })
     } catch (error) {
         res.send("adding user error: " + error);
