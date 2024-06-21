@@ -24,7 +24,7 @@ const formSchema = z.object({
   password: z.string().min(8, "Password must be atleast 8 characters"),
 });
 
-const loginForm = () => {
+const LoginForm = () => {
   const router = useRouter();
   const { toast } = useToast();
   const [loggedIn, setLoggedIn] = useState(false);
@@ -126,4 +126,4 @@ const loginForm = () => {
   );
 };
 
-export default loginForm;
+export default LoginForm;

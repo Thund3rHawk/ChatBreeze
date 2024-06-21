@@ -36,6 +36,7 @@ export class SocketService {
             socket.on('send-message', (reciever) => {
                 const {receipentId,message} = reciever;
                 // Validate the userId and fetch the user from MongoDB
+                // here we have to update the mongodb server along with the user contact and messages. 
                 const recieverSocketId = users[receipentId]
                 // users[userId] = socket.id;
                 if (recieverSocketId){

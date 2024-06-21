@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import SignUpForm from "@/components/authpages/signUpForm";
 import { useRouter } from "next/navigation";
 import React from "react";

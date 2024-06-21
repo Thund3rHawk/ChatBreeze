@@ -12,6 +12,7 @@ export const socketContext = createContext<chatContextType | null>(null);
 
 
 const socketProvider: React.FC<{ children: React.ReactNode}> = ({children}) => {
+  // this chat and setChat is for the recieving the messages I have to write another one for while I send a message it will updated in the right hand side of my chatbox.
   const [chat, setChat] = useState<string[]>([]);
   const [message, setMessage] = useState<string>();
   const socketRef = useRef<Socket | null>(null);
