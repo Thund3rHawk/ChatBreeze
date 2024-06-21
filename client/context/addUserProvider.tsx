@@ -20,7 +20,9 @@ const addUserProvider: React.FC<{ children: React.ReactNode }> = ({
       
       const updateUserCard = user.map((item:any)=>{
         const name = item.name;
-        return (<UserCard name = {name} userId= {item.contactId}/>)
+        if (userId === item.userId){
+          return (<UserCard name = {name} userId= {item.contactId}/>)
+        }
       })
       setUserCard (updateUserCard);
     }

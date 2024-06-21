@@ -18,7 +18,7 @@ model User {
 
 model Contact {
   id       String    @id @default(auto()) @map("_id") @db.ObjectId
-  email     String    @unique
+  email     String    
   name      String    @unique
   messages Messages[]
   contactId String

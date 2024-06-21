@@ -28,15 +28,13 @@ const socketProvider: React.FC<{ children: React.ReactNode}> = ({children}) => {
         try{
           const senderId = await getCookiesData();
           socket.connect();
-          socket.emit ('join', userId);
-          // socket.emit ('join', senderId);
+          socket.emit ('join', senderId);
 
 
-          socket.emit ('newChat', {receiverId: senderId,senderId: userId,message: message});
+          socket.emit ('send-message', {receipentId:userId,message: message});
           
-          socket.on ('newChat',(payload)=>{
-            // const {receiverId, message} = payload
-            console.log (`sender id is ${payload.receiverId} reciever id is ${payload.senderId} and message is: ${payload.message}`)
+          socket.on ('receive-message',(payload)=>{
+            console.log(`Message from ${payload.senderId}: ${payload.message}`);         
             const chats = [...chat,payload.message];              
             setChat (chats);
           });
@@ -48,21 +46,11 @@ const socketProvider: React.FC<{ children: React.ReactNode}> = ({children}) => {
       }
 
       getSenderId();
-
-      // have to update here the userId obtained through by clicking the user contact
-      // socket.on ("chat", (payload)=>{
-      //     const chats = [...chat, payload];
-          
-      //     setChat (chats);
-      // })
-
-
-
     return ()=>{
         socket.disconnect();
         socketRef.current = null;
     }
-  },[userId,message]);
+  },[message]);
 
   // useEffect (()=>{
   //   if (message && socketRef.current) socketRef.current.emit ('send_message', message);
