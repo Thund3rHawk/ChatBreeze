@@ -13,7 +13,7 @@ const Login = () => {
         <div className="border border-black rounded-2xl h-[50vh] w-[40vw] ">
           <LoginForm />
           <div className="text-center">
-            Haven't an account
+            Have not an account
             <button
               onClick={() => {
                 router.push("./signup");
