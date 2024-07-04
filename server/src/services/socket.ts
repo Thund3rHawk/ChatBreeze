@@ -27,7 +27,6 @@ export class SocketService {
            
             socket.on('join', (userId: string) => {
                 // Validate the userId and fetch the user from MongoDB
-                users[userId] = socket.id;
                 socket.join(userId);
                 console.log(`User ${userId} joined with socket id ${socket.id}`);
             });
@@ -35,12 +34,9 @@ export class SocketService {
 
             socket.on('send-message', (reciever) => {
                 const {receipentId,message} = reciever;
-                // Validate the userId and fetch the user from MongoDB
-                // here we have to update the mongodb server along with the user contact and messages. 
-                const recieverSocketId = users[receipentId]
-                // users[userId] = socket.id;
-                if (recieverSocketId){
-                    io.to(recieverSocketId).emit('receive-message',{
+                // Validate the userId and fetch the user from MongoDB                
+                if (receipentId){
+                    io.to(receipentId).emit('receive-message',{
                         senderId:socket.id,
                         message:message,
                         status: 'recieved',

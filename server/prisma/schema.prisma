@@ -36,3 +36,9 @@ model Messages {
   post    Contact   @relation(fields: [contactId], references: [id])
   contactId String @db.ObjectId
 }
+
+model otpSchema {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  userId   String  @unique
+  otp     String
+}

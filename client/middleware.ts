@@ -19,7 +19,7 @@ export function middleware(request: NextRequest) {
     if ((publicPath && isLoggedIn === 'true') || (!homePath && rootDir && isLoggedIn === 'true')){
         return NextResponse.redirect(new URL(`/home/${userId}`, request.url))
     }
-    if ( !publicPath && isLoggedIn === 'false'){
+    if ( !publicPath && isLoggedIn === 'false' || rootDir){
         return NextResponse.redirect(new URL('/authPage/signin', request.url))
     }
 }

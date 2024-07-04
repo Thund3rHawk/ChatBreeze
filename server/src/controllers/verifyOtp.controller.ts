@@ -1,11 +1,16 @@
 import prisma from "../db";
 import { asyncHandler } from "../utils/asyncHandler";
-import { OTP } from "./signup.controller";
 
 const verifyOtp = asyncHandler(async (req, res) => {
     const { id, otp } = req.body;
     try {
-        if (OTP === otp) {
+        const otpData = await prisma.otpSchema.findUnique({
+            where:{
+                userId: id,
+            }
+        })        
+
+        if (otpData?.otp === otp) {
             await prisma.user.update({
                 where: {
                     id: id,
@@ -14,8 +19,11 @@ const verifyOtp = asyncHandler(async (req, res) => {
                     verified: true,
                 },
             })
+            res.send ("User Verified");
         }
-        res.send ("User Verified");
+        else {
+            res.send ("Incorrect OTP please enter correct one.")
+        }
     } catch (error) {
         res.send ("User is not verified");
         console.log ("verified Error: ", error);

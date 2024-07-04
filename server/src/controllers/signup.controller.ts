@@ -5,7 +5,8 @@ import randomstring from 'randomstring'
 import { sendEmail } from "../utils/nodemailerConfig";
 import prisma from "../db";
 
-export const OTP = randomstring.generate({
+
+const OTP = randomstring.generate({
     length: 6,
     charset: ['numeric']
 });
@@ -31,8 +32,36 @@ const signUp = asyncHandler(async (req:Request,res:Response)=>{
                         password: hash
                     }
                 })
-                sendEmail(email,OTP);
+
                 const userID = user.id;
+                
+                const checkUser = await prisma.otpSchema.findUnique({
+                    where:{
+                        userId: userID,
+                    }
+                })
+
+                if (!checkUser){
+                    await prisma.otpSchema.create({
+                        data:{
+                            userId: userID,
+                            otp : OTP
+                        }
+                    })
+                }
+
+                else {
+                    await prisma.otpSchema.update({
+                        where:{
+                            userId: userID,
+                        },
+                        data:{
+                            otp: OTP,
+                        }
+                    })
+                }
+
+                sendEmail(email,OTP);
                 res.send ({
                     description: "User Registered successfully.",
                     otp: `OTP is ${OTP}`,
