@@ -1,7 +1,14 @@
 import React, { SetStateAction } from "react";
 
+export type chatMessageType = {
+    message: string,
+    isUser: boolean,
+    userId?: string,
+}
+
 export type chatContextType = {
-    chat: string[],
+    chat: chatMessageType[],
+    setChat: React.Dispatch<SetStateAction<chatMessageType[]>>,
     setMessage: React.Dispatch<SetStateAction<string | undefined>>,
 }
 

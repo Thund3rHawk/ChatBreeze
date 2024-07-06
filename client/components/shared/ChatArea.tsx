@@ -1,12 +1,6 @@
 "use client";
-import React, { useEffect } from "react";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "../ui/form";
+import React, { useEffect, useState } from "react";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { z } from "zod";
@@ -20,8 +14,8 @@ const formSchema = z.object({
 });
 
 const ChatArea = () => {
-  const { chat, setMessage } = useChat();
-  const {userId, setUserId} = useUserChat();
+  const { chat, setMessage, setChat } = useChat();
+  const { userId, setUserId } = useUserChat();
 
   // Here we fetch the messages through the api while loading first, using the userId taken by chatProvider.
   // useEffect(()=>{
@@ -41,41 +35,33 @@ const ChatArea = () => {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     setMessage(values.message);
+    const chats = [...chat, { message: values.message, isUser: true, userId: userId }];
+    setChat(chats);
     form.reset();
   }
 
-  const closeChat =()=>{
-    setUserId('');
+  const closeChat = () => {
+    setUserId("");
+  };
+
+  if (userId === "") {
+    return <div>Chats will appear here.</div>;
   }
-  
-  if (userId === ''){
-    return (
-      <div>
-        Chats will appear here.
-      </div>
-    )
-  }
-  
+
   return (
-    <>  
-      <Button className="absolute right-11 rounded-3xl" onClick={closeChat}>X</Button>
+    <>
+      <Button className="absolute right-11 rounded-3xl m-1" onClick={closeChat}>
+        X
+      </Button>
       <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="absolute flex bottom-10 justify-between"
-        >
+        <form onSubmit={form.handleSubmit(onSubmit)} className="absolute flex bottom-10 justify-between">
           <FormField
             control={form.control}
             name="message"
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Input
-                    placeholder="Enter Message"
-                    {...field}
-                    type="text"
-                    className="w-[53vw] ms-5"
-                  />
+                  <Input placeholder="Enter Message" {...field} type="text" className="w-[53vw] ms-5" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -88,19 +74,16 @@ const ChatArea = () => {
         <div className="overflow-auto h-[80vh] no-scrollbar p-3">
           {chat.map((payload, index) => {
             return (
-              <div
-                key={index}
-                className="border bg-slate-600 border-black rounded-3xl p-3 w-2/5 mx-3"
-              >
-                <p>{payload}</p>
+              <div key={index} className={`flex ${payload.isUser ? "justify-end" : "justify-start"}`}>
+                {payload.userId === userId ? (
+                  <p className="border bg-slate-600 border-black rounded-3xl p-3 w-2/5 mx-3">{payload.message}</p>
+                ) : ""}
               </div>
             );
           })}
         </div>
       ) : (
-        <div className="flex justify-center items-center h-[70vh]">
-          Chats Will appear here {userId}
-        </div>
+        <div className="flex justify-center items-center h-[70vh]">Chats Will appear here {userId}</div>
       )}
     </>
   );

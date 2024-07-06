@@ -1,10 +1,6 @@
 import { Server } from "socket.io"
 import prisma from "../db";
 
-interface UserConnections {
-    [userId: string]: string;
-}
-
 export class SocketService {
     private _io: Server;
 
@@ -17,11 +13,9 @@ export class SocketService {
         });
     }
 
-
     // we can send message to the particular user using this userID
     public sendMessage() {
         const io = this.io;
-        const users: UserConnections = {};
         io.on("connection", (socket) => {
             // here i have to save the message into the db for that particular user.
            
@@ -30,7 +24,6 @@ export class SocketService {
                 socket.join(userId);
                 console.log(`User ${userId} joined with socket id ${socket.id}`);
             });
-
 
             socket.on('send-message', (reciever) => {
                 const {receipentId,message} = reciever;

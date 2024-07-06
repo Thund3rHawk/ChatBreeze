@@ -1,6 +1,6 @@
 'use client'
 import useUserChat from "@/hooks/useUserChat";
-import { chatContextType } from "@/types";
+import { chatContextType, chatMessageType } from "@/types";
 import { endpoints } from "@/utils/endpoints";
 import { getCookiesData } from "@/utils/getCookiesData";
 import React, { useState, createContext, useEffect, useRef } from "react";
@@ -8,14 +8,11 @@ import { Socket, io } from "socket.io-client";
 
 export const socketContext = createContext<chatContextType | null>(null);
 
-
-
-
 const socketProvider: React.FC<{ children: React.ReactNode}> = ({children}) => {
   // this chat and setChat is for the recieving the messages I have to write another one for while I send a message it will updated in the right hand side of my chatbox.
-  const [chat, setChat] = useState<string[]>([]);
+  const [chat, setChat] = useState<chatMessageType[]>([]);
   const [message, setMessage] = useState<string>();
-  const socketRef = useRef<Socket | null>(null);
+  const socketRef = useRef<Socket | null>();
   
   // Have to use this userid for making the specific chatroom for one to one connection
   const {userId} = useUserChat();
@@ -31,12 +28,11 @@ const socketProvider: React.FC<{ children: React.ReactNode}> = ({children}) => {
           socket.connect();
           socket.emit ('join', senderId);
 
-
           socket.emit ('send-message', {receipentId:userId,message: message});
           
           socket.on ('receive-message',(payload)=>{
             console.log(`Message from ${payload.senderId}: ${payload.message}`);         
-            const chats = [...chat,payload.message];              
+            const chats = [...chat,{message:payload.message, isUser: false, userId: userId}];              
             setChat (chats);
           });
 
@@ -53,14 +49,9 @@ const socketProvider: React.FC<{ children: React.ReactNode}> = ({children}) => {
     }
   },[message]);
 
-  // useEffect (()=>{
-  //   if (message && socketRef.current) socketRef.current.emit ('send_message', message);
-  // }, [message]);
-  
-
   return (
     <>
-      <socketContext.Provider value={{chat, setMessage}}>
+      <socketContext.Provider value={{chat, setMessage, setChat}}>
         {children}
       </socketContext.Provider>
     </>
