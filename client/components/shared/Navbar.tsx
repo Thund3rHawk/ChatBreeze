@@ -24,8 +24,8 @@ const Navbar = () => {
     }
 
     const loggedOut=()=>{
-        createCookie(false);
-        route.push ('/authPage/signin');
+        createCookie(false,'');
+        route.push ('/authPage');
     }
   return (
         <div className = 'flex justify-between container py-5'>

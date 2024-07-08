@@ -10,7 +10,7 @@ export function middleware(request: NextRequest) {
     const userId = cookiesStore.get ("userId")?.value
     const isLoggedIn = cookiesStore.get("loggedIn")?.value
     
-    const publicPath = path === '/authPage/signin' || path === '/authPage/signup';
+    const publicPath = path === '/authPage';
     const homePath = path === `/home/${userId}`;
     const rootDir = path === '/';
 
@@ -20,7 +20,7 @@ export function middleware(request: NextRequest) {
         return NextResponse.redirect(new URL(`/home/${userId}`, request.url))
     }
     if ( !publicPath && isLoggedIn === 'false' || rootDir){
-        return NextResponse.redirect(new URL('/authPage/signin', request.url))
+        return NextResponse.redirect(new URL('/authPage', request.url))
     }
 }
 
@@ -28,8 +28,7 @@ export const config = {
     matcher: [
         '/',
         '/home/:path*',
-        '/authPage/signin',
-        '/authPage/signup',
-        '/authPage/verify',
+        '/authPage',
+        '/authPage/verify'
     ],
 }

@@ -4,6 +4,7 @@ import { signUp } from '../controllers/signup.controller';
 import { verifyOtp } from '../controllers/verifyOtp.controller';
 import { addUser } from '../controllers/addUser.controller';
 import { getContacts } from '../controllers/getContacts.controller';
+import { message } from '../controllers/messages.controller';
 
 
 const router = express.Router();
@@ -22,5 +23,8 @@ router.route('/adduser').post(addUser);
 
 // GetUserData Route
 router.route('/getContacts').post(getContacts);
+
+// Messages Route
+router.route('/message').post(message);
 
 export {router};

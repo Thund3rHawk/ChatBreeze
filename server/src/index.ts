@@ -17,6 +17,7 @@ app.use ('/signin', router);
 app.use ('/verify', router);
 app.use ('/adduser', router);
 app.use ('/getContacts', router);
+app.use ('/message', router);
 
 const server = app.listen (port , ()=>{
     console.log (`Server is listening on port:${port}`);

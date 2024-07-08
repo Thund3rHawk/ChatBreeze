@@ -5,4 +5,5 @@ export const endpoints = {
     signupEndpoint: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/signup`,
     addUser: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/adduser`,
     getContactDetails: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/getContacts`,
+    message: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/message`,
 }

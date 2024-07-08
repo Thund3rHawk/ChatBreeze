@@ -28,11 +28,11 @@ model Contact {
 
 model Messages {
   id      String @id @default(auto()) @map("_id") @db.ObjectId
-  sendMessage String
+  message String
   seenMessage  Boolean
   sendMessageTime     DateTime
-  recievedMessage String
-  recievedMessageTime     DateTime
+  senderId      String
+  recieverId    String
   post    Contact   @relation(fields: [contactId], references: [id])
   contactId String @db.ObjectId
 }

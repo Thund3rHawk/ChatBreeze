@@ -4,20 +4,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import axios from "axios";
 import { createCookie } from "@/utils/createCookie";
 import { useRouter } from "next/navigation";
 import { endpoints } from "@/utils/endpoints";
 import { useToast } from "../ui/use-toast";
+import { Loader2 } from "lucide-react";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -29,6 +23,7 @@ const LoginForm = () => {
   const { toast } = useToast();
   const [loggedIn, setLoggedIn] = useState(false);
   const [userId, setUserId] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     createCookie(loggedIn, userId);
@@ -50,6 +45,7 @@ const LoginForm = () => {
     };
 
     try {
+      setLoading(true);
       const res = await axios.post(endpoints.singinEndpoint, data);
       if (res.data.message === "Login Successful") {
         toast({
@@ -78,11 +74,13 @@ const LoginForm = () => {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   }
 
   return (
-    <div className="m-10">
+    <div className="m-6">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
@@ -92,11 +90,7 @@ const LoginForm = () => {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="Enter your email"
-                    {...field}
-                    type="email"
-                  />
+                  <Input placeholder="Enter your email" {...field} type="email" className="bg-white"/>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -109,17 +103,22 @@ const LoginForm = () => {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input
-                    placeholder="Enter your password"
-                    {...field}
-                    type="password"
-                  />
+                  <Input placeholder="Enter your password" {...field} type="password" className="bg-white"/>
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <Button type="submit">Login</Button>
+          {loading ? (
+            <Button disabled className="w-full">
+              <Loader2 className="mr-2 h-4 animate-spin " />
+              Signing in
+            </Button>
+          ) : (
+            <Button type="submit" className="w-full">
+              Sign In
+            </Button>
+          )}
         </form>
       </Form>
     </div>

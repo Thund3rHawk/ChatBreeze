@@ -23,7 +23,7 @@ export default function RootLayout({
     <ThemeProvider> 
       <SocketProvider>
         <html lang="en">
-          <body className={inter.className}>
+          <body className={`bg-gradient-to-r from-[#5061F6] to-[#00DFFD] bg-cover ${inter.className}`}>
             {children}
             <Toaster />
           </body>
