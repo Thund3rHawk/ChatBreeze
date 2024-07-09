@@ -90,7 +90,7 @@ const LoginForm = () => {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter your email" {...field} type="email" className="bg-white"/>
+                  <Input placeholder="Enter your email" {...field} type="email" className="bg-white" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -103,7 +103,7 @@ const LoginForm = () => {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter your password" {...field} type="password" className="bg-white"/>
+                  <Input placeholder="Enter your password" {...field} type="password" className="bg-white" />
                 </FormControl>
                 <FormMessage />
               </FormItem>

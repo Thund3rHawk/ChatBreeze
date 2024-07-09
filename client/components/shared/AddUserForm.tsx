@@ -4,14 +4,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { DialogFooter } from "../ui/dialog";
 import useAddUser from "@/hooks/useAddUser";
@@ -29,7 +22,7 @@ const formSchema = z.object({
 
 const AddUserForm = () => {
   const { userCard, setUserCard } = useAddUser();
-  const { toast } = useToast()
+  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -40,30 +33,29 @@ const AddUserForm = () => {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    
     try {
       const data = {
         userId: await getCookiesData(),
         email: values.email,
-        name: values.username
-      }
-      const res = await axios.post (endpoints.addUser,data);
-      if (res.data === 'Invalid Email'){
+        name: values.username,
+      };
+      const res = await axios.post(endpoints.addUser, data);
+      if (res.data === "Invalid Email") {
         toast({
           variant: "destructive",
           title: res.data,
           description: "Enter a existing email",
-        })
+        });
         return;
       }
-      const addUserCard = [...userCard, (<UserCard name={values.username} userId={res.data.userId}/>)];
+      const addUserCard = [...userCard, <UserCard name={values.username} userId={res.data.userId} />];
       setUserCard(addUserCard);
       toast({
         title: "User Added Successfully",
-      })
+      });
       form.reset();
     } catch (error) {
-      console.log (error);
+      console.log(error);
     }
   }
 
@@ -99,7 +91,7 @@ const AddUserForm = () => {
           />
           <DialogFooter>
             <DialogClose asChild>
-                <Button type="submit">Add User</Button>
+              <Button type="submit">Add User</Button>
             </DialogClose>
           </DialogFooter>
         </form>

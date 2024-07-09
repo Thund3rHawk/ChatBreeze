@@ -1,5 +1,4 @@
 "use client";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -66,14 +65,13 @@ function Verify({ params }: { params: { slug: string } }) {
     }
   }
 
-  async function sendNewOtp (){
+  async function sendNewOtp() {
     // have to complete the function and update the new otp for the specific user
   }
 
-
   return (
     <div className="flex min-h-screen min-w-screen justify-center items-center flex-col">
-      <div className="bg-[#def2f1] rounded-3xl p-8  shadow-blue-950 shadow-2xl">        
+      <div className="bg-[#def2f1] rounded-3xl p-8  shadow-blue-950 shadow-2xl">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="w-[30vw] space-y-6 bg-[#def2f1] rounded-3xl p-8">
             <FormField
@@ -113,7 +111,9 @@ function Verify({ params }: { params: { slug: string } }) {
         </Form>
         <div className="text-center">
           Didn't get an OTP &nbsp;
-          <button onClick={sendNewOtp} className="text-violet-600">Send OTP</button>
+          <button onClick={sendNewOtp} className="text-violet-600">
+            Send OTP
+          </button>
         </div>
       </div>
     </div>

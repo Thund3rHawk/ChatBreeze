@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -6,11 +6,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
-import AddUserForm from "./AddUserForm"
+} from "@/components/ui/dialog";
+import AddUserForm from "./AddUserForm";
 
-
-const AddUserDialogue =()=> {
+const AddUserDialogue = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -19,14 +18,12 @@ const AddUserDialogue =()=> {
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Add New User</DialogTitle>
-          <DialogDescription>
-            Enter the name and email to add a new user
-          </DialogDescription>
-        </DialogHeader>         
-        <AddUserForm/>              
+          <DialogDescription>Enter the name and email to add a new user</DialogDescription>
+        </DialogHeader>
+        <AddUserForm />
       </DialogContent>
     </Dialog>
-  )
-}
+  );
+};
 
-export default AddUserDialogue
+export default AddUserDialogue;

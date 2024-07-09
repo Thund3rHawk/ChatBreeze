@@ -17,10 +17,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-
   return (
-    <ThemeProvider> 
+    <ThemeProvider>
       <SocketProvider>
         <html lang="en">
           <body className={`bg-gradient-to-r from-[#5061F6] to-[#00DFFD] bg-cover ${inter.className}`}>
@@ -28,7 +26,7 @@ export default function RootLayout({
             <Toaster />
           </body>
         </html>
-      </SocketProvider>       
+      </SocketProvider>
     </ThemeProvider>
   );
 }

@@ -4,6 +4,8 @@ export type chatMessageType = {
     message: string,
     isUser: boolean,
     userId?: string,
+    userName?: string,
+    time?: string
 }
 
 export type chatContextType = {

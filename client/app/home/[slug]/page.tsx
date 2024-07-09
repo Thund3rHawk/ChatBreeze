@@ -7,7 +7,6 @@ const Home = ({ params }: { params: { slug: string } }) => {
   const { theme } = useTheme();
   // console.log(params);
 
-  
   return (
     <div className={`${theme} h-screen`}>
       <Navbar />

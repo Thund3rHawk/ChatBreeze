@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
@@ -9,7 +9,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import useChat from "@/hooks/useChat";
 import useUserChat from "@/hooks/useUserChat";
 import NearMeRoundedIcon from "@mui/icons-material/NearMeRounded";
-import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 const formSchema = z.object({
@@ -19,7 +18,7 @@ const formSchema = z.object({
 const ChatArea = () => {
   const { chat, setMessage, setChat } = useChat();
   const { userId, setUserId, setUserName, userName, showUserDetails, setShowUserDetails } = useUserChat();
-  
+
   // Here we fetch the messages through the api while loading first, using the userId taken by chatProvider.
   // useEffect(()=>{
 
@@ -44,7 +43,7 @@ const ChatArea = () => {
   }
 
   const closeChat = () => {
-    setUserName ('');
+    setUserName("");
     setUserId("");
   };
 
@@ -52,11 +51,11 @@ const ChatArea = () => {
     return <div className="flex justify-center items-center h-full">Chats will appear here.</div>;
   }
 
-  const userDetails =()=>{
+  const userDetails = () => {
     // here I have to show the user Card
-    console.log (userId);
-    setShowUserDetails (!showUserDetails);
-  }
+    console.log(userId);
+    setShowUserDetails(!showUserDetails);
+  };
 
   return (
     <>
@@ -68,8 +67,8 @@ const ChatArea = () => {
               <AvatarFallback className="bg-slate-400">CN</AvatarFallback>
             </Avatar>
             <div>
-            <h1>{userName}</h1>
-            <p className="text-green-400">{userId}</p>
+              <h1>{userName}</h1>
+              <p className="text-green-400">{userId}</p>
             </div>
           </div>
           <Button className="rounded-3xl m-1" onClick={closeChat} variant="ghost">
@@ -84,11 +83,18 @@ const ChatArea = () => {
                   return (
                     <div key={index} className={`flex ${payload.isUser ? "justify-end" : "justify-start"}`}>
                       {payload.userId === userId ? (
-                        <p
+                        <div
                           className={`${payload.isUser ? "bg-muted rounded-lg p-3 max-w-[70%] text-black" : "bg-green-700 rounded-lg p-3 max-w-[70%] text-primary-foreground"}`}
                         >
-                          {payload.message}
-                        </p>
+                          {!payload.isUser ? (
+                            <>
+                              <div className="font-bold">{userName}</div>
+                            </>
+                          ) : (
+                            ""
+                          )}
+                          <p className="">{payload.message}</p>
+                        </div>
                       ) : (
                         ""
                       )}
