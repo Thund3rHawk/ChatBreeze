@@ -11,7 +11,7 @@ const LeftSection = () => {
   }
   
   return (
-    <div className="w-[30vw] h-[90vh] border border-slate-400 rounded-3xl mx-10 px-10 py-6">
+    <div className="w-[25vw] h-[90vh] border-r border-muted mx-10 px-10 py-6">
       <div className="flex justify-between">
         Search Bar
         <AddUserDialogue />

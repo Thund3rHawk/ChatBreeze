@@ -7,12 +7,16 @@ import ChatProvider from "@/context/chatProvider";
 const HomePage = () => {
   return (
     <div className="">
-      <div className="flex justify-between">
+      <div className="flex">
         <ChatProvider>
           <AddUserProvider>
-            <LeftSection />
+            <div className="flex-1">
+              <LeftSection />
+            </div>
           </AddUserProvider>
-          <RightSection />
+          <div className="flex-1">            
+            <RightSection />
+          </div>
         </ChatProvider>
       </div>
     </div>

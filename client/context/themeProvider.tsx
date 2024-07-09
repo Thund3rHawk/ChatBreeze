@@ -6,7 +6,7 @@ import { createContext } from "react";
 export const themeContext = createContext<themeContextType>({theme: '', setTheme: ()=>{}});
 
 const ThemeProvider:React.FC<{children: React.ReactNode}> = ({children})=>{
-    const [theme, setTheme] = useState<string>('')
+    const [theme, setTheme] = useState<string>('bg-gradient-to-r from-[#FFFFFF] to-[#E4F9FF]')
 
     useEffect(()=>{        
         const LocalStoragetheme = localStorage.getItem("theme");

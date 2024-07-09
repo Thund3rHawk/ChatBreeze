@@ -5,7 +5,7 @@ import useTheme from "@/hooks/useTheme";
 
 const Home = ({ params }: { params: { slug: string } }) => {
   const { theme } = useTheme();
-  console.log(params);
+  // console.log(params);
 
   
   return (
