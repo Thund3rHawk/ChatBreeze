@@ -12,6 +12,7 @@ model User {
   email   String   @unique
   username    String
   password    String 
+  avatarUrl   String
   verified    Boolean  @default(false)
   contacts   Contact[]
 }
@@ -20,6 +21,7 @@ model Contact {
   id       String    @id @default(auto()) @map("_id") @db.ObjectId
   email     String    
   name      String    @unique
+  avatarUrl   String
   messages Messages[]
   contactId String
   post    User   @relation(fields: [userId], references: [id])
