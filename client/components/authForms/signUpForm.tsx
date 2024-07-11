@@ -45,7 +45,7 @@ const SignUpForm = () => {
   }
 
   return (
-    <div className="m-10">
+    <div className="m-6">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
@@ -55,7 +55,7 @@ const SignUpForm = () => {
               <FormItem>
                 <FormLabel>Username</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter your Name" {...field} className="bg-white" />
+                  <Input placeholder="Enter your name" {...field} className="bg-white" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
