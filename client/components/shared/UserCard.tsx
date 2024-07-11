@@ -15,7 +15,7 @@ const UserCard: React.FC<props> = ({ name, userId }) => {
   };
 
   return (
-    <div className="border border-green-500 flex p-3 rounded-2xl my-2 " onClick={openChat}>
+    <div className="border border-green-500 flex p-3 rounded-2xl my-2 cursor-pointer" onClick={openChat}>
       <div className="mx-6">
         <Avatar>
           <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />

@@ -36,4 +36,6 @@ export type chatProviderType = {
     setUserName: React.Dispatch<SetStateAction<string>>,
     showUserDetails: boolean,
     setShowUserDetails: React.Dispatch<SetStateAction<boolean>>,
+    userImage: string,
+    setUserImage: React.Dispatch<SetStateAction<string>>,
 }

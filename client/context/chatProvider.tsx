@@ -8,11 +8,14 @@ export const ChatContext = createContext<chatProviderType>({
   setUserName: () => {},
   showUserDetails: false,
   setShowUserDetails: () => {},
+  userImage: '',
+  setUserImage: ()=>{},
 });
 
 const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [userId, setUserId] = useState("");
   const [userName, setUserName] = useState("");
+  const [userImage, setUserImage] = useState("https://github.com/shadcn.png");
   const [showUserDetails, setShowUserDetails] = useState(false);
 
   useEffect(() => {
@@ -20,7 +23,7 @@ const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
   }, [userId]);
 
   return (
-    <ChatContext.Provider value={{ userId, setUserId, userName, setUserName, showUserDetails, setShowUserDetails }}>
+    <ChatContext.Provider value={{ userId, setUserId, userName, setUserName, showUserDetails, setShowUserDetails, userImage, setUserImage }}>
       {children}
     </ChatContext.Provider>
   );

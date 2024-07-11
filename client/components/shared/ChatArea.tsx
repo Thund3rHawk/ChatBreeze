@@ -10,6 +10,7 @@ import useChat from "@/hooks/useChat";
 import useUserChat from "@/hooks/useUserChat";
 import NearMeRoundedIcon from "@mui/icons-material/NearMeRounded";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { motion } from "framer-motion";
 
 const formSchema = z.object({
   message: z.string().max(500),
@@ -22,7 +23,7 @@ const ChatArea = () => {
   // Here we fetch the messages through the api while loading first, using the userId taken by chatProvider.
   // useEffect(()=>{
 
-  // },[]);
+  // },[userId]);
 
   let checkChat = false;
   if (chat.length != 0) {
@@ -53,13 +54,13 @@ const ChatArea = () => {
 
   const userDetails = () => {
     // here I have to show the user Card
-    console.log(userId);
+    // console.log(userId);
     setShowUserDetails(!showUserDetails);
   };
 
   return (
     <>
-      <div className="flex flex-col">
+      <motion.div className="flex flex-col" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{duration: 1.5}}>
         <div className="flex justify-between border-b border-muted pb-4">
           <div className="flex items-center justify-between">
             <Avatar className="mx-6" onClick={userDetails}>
@@ -115,7 +116,7 @@ const ChatArea = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Input placeholder="Enter Message" {...field} type="text" className="w-[55vw] ms-5" />
+                        <Input placeholder="Enter Message" {...field} type="text" className="w-[55vw] ms-5" autoComplete="off"/>
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -128,7 +129,7 @@ const ChatArea = () => {
             </Form>
           </div>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };
