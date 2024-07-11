@@ -15,12 +15,14 @@ const addUser = asyncHandler(async (req: Request, res: Response) => {
             res.send("Invalid Email");
             return;
         }
-        // user can add a email in its contact once have to write this logic
+        // user can add a email in its contact once have to write this logic        
         const user = await prisma.contact.create({
             data: {
                 email: email,
                 name: name,
                 contactId: checkEmail.id,
+                bio: checkEmail.bio,
+                avatarUrl: checkEmail.avatarUrl,
                 post: {
                     connect: {
                         id: userId
