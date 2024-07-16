@@ -33,6 +33,7 @@ const addUser = asyncHandler(async (req: Request, res: Response) => {
         res.send({
             message: "user added successfully",
             userId: user.contactId,
+            contactObjectId: user.id,
         })
     } catch (error) {
         res.send("adding user error: " + error);

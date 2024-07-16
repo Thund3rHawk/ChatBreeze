@@ -5,9 +5,7 @@ import { verifyOtp } from '../controllers/verifyOtp.controller';
 import { addUser } from '../controllers/addUser.controller';
 import { getContacts } from '../controllers/getContacts.controller';
 import { message } from '../controllers/messages.controller';
-import { userDetails } from '../controllers/userDetails.controller';
-import { detailsUpdate } from '../controllers/detailsUpdate.controller';
-
+import { userDetailsUpdate } from '../controllers/userDetailsUpdate.controller';
 
 const router = express.Router();
 
@@ -29,11 +27,7 @@ router.route('/getContacts').post(getContacts);
 // Messages Route
 router.route('/message').post(message);
 
-// Update User Route
-router.route('/userDetails/:userId').post(userDetails);
-
 // UserDetails Update Route
-router.route('/detailsUpdate/:userId').post(detailsUpdate);
-
+router.route('/detailsUpdate').post(userDetailsUpdate);
 
 export {router};
