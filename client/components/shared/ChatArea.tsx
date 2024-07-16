@@ -49,10 +49,13 @@ const ChatArea = () => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    setMessage(values.message);
-    const chats = [...chat, { message: values.message, isUser: true, userId: userId }];
-    setChat(chats);
-    form.reset();
+    const msg = values.message.trim();
+    if (msg != ''){
+      setMessage(values.message);
+      const chats = [...chat, { message: values.message, isUser: true, userId: userId }];
+      setChat(chats);
+      form.reset();
+    }
   }
 
   const closeChat = () => {

@@ -11,7 +11,7 @@ export type chatMessageType = {
 export type chatContextType = {
     chat: chatMessageType[],
     setChat: React.Dispatch<SetStateAction<chatMessageType[]>>,
-    setMessage: React.Dispatch<SetStateAction<string | undefined>>,
+    setMessage: React.Dispatch<SetStateAction<string>>,
 }
 
 export type themeContextType = {
