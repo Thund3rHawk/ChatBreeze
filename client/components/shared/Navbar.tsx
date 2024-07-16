@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -18,10 +18,11 @@ import DarkModeRoundedIcon from "@mui/icons-material/DarkModeRounded";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import { getCookiesData } from "@/utils/getCookiesData";
 
-export default function Component() {
-  const { setTheme, theme } = useTheme();
+export default function Navbar() {
   const route = useRouter();
+  const { setTheme, theme } = useTheme();
 
   const toggleDarkMode = () => {
     if (theme === "bg-gradient-to-r from-[#FFFFFF] to-[#E4F9FF]") {
@@ -37,9 +38,15 @@ export default function Component() {
     createCookie(false, "");
     route.push("/authPage");
   };
+
+  const openSetting = async () => {
+    const userId = await getCookiesData();
+    route.push(`/setting/${userId}`)
+  };
+
   return (
     <header className={`flex h-16 w-full items-center justify-between px-4 md:px-6 ${theme}`}>
-      <Link href="#" className="flex items-center gap-2" prefetch={false}>
+      <Link href="/" className="flex items-center gap-2" prefetch={false}>
         <span className="text-lg font-bold">Chat Breeze</span>
       </Link>
       <div className="flex items-center gap-4">
@@ -69,7 +76,7 @@ export default function Component() {
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="flex justify-between">
+            <DropdownMenuItem className="flex justify-between" onClick={openSetting}>
               Settings <SettingsOutlinedIcon />
             </DropdownMenuItem>
             <DropdownMenuItem className="flex justify-between">
@@ -80,7 +87,7 @@ export default function Component() {
               Logout <LogoutRoundedIcon />
             </DropdownMenuItem>
           </DropdownMenuContent>
-        </DropdownMenu>
+        </DropdownMenu>       
       </div>
     </header>
   );

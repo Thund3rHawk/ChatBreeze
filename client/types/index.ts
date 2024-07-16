@@ -39,3 +39,8 @@ export type chatProviderType = {
     userImage: string,
     setUserImage: React.Dispatch<SetStateAction<string>>,
 }
+
+export type updateUserContextType = {
+    userId: string,
+    
+}

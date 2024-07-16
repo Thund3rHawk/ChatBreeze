@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import LeftSection from "./shared/LeftSection";
 import RightSection from "./shared/RightSection";
@@ -6,20 +7,21 @@ import ChatProvider from "@/context/chatProvider";
 
 const HomePage = () => {
   return (
-    <div className="">
-      <div className="flex">
-        <ChatProvider>
-          <AddUserProvider>
+    <>
+      <ChatProvider>
+        <AddUserProvider>
+          <div className="flex">
             <div className="flex-1">
               <LeftSection />
             </div>
-          </AddUserProvider>
-          <div className="flex-1">            
-            <RightSection />
+            <div className="border border-muted h-[90vh]"></div>
+            <div className="flex-1">
+              <RightSection />
+            </div>
           </div>
-        </ChatProvider>
-      </div>
-    </div>
+        </AddUserProvider>
+      </ChatProvider>
+    </>
   );
 };
 

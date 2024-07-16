@@ -11,6 +11,7 @@ const UserDashBoard = () => {
   const { setShowUserDetails, showUserDetails, userName, userImage } = useUserChat();
 
   useEffect(()=>{
+    // Function for close userDashboard using escape
     const handleKeyDown = (event:any) => {
       if (event.key === 'Escape') {
         closeUserDashboard();
@@ -39,10 +40,25 @@ const UserDashBoard = () => {
           <Image src={userImage} alt="@shadcn" className="rounded-full" width={200} height={200} />
           <h1 className="m-5 text-[25px]">{userName}</h1>
           <p className="my-4 w-[35vw]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto laborum unde nemo cumque molestias illum molestiae tempora cum quam maxime!</p>
-          <div className="flex justify-between w-[20vw] border-t border-muted p-4">
-              <Button className="rounded-lg shadow-sm shadow-green-600 px-8 py-4" onClick={closeUserDashboard}><ChatRoundedIcon className="text-[30px] "/></Button>
-              <Button className="rounded-lg shadow-sm shadow-green-600 px-8 py-4"><CallRoundedIcon className="text-[30px] "/></Button>
-              <Button className="rounded-lg shadow-sm shadow-green-600 px-8 py-4"><DuoRoundedIcon className="text-[30px] "/></Button>
+          <div className="flex justify-between w-[40vw] border-t border-muted p-4">
+              <Button className="rounded-lg shadow-sm shadow-green-600 px-4 py-2 w-[200px]" onClick={closeUserDashboard}>
+                <div className="flex-col">
+                  <ChatRoundedIcon className=""/> 
+                  <p>Message</p>                  
+                </div>
+                </Button>
+              <Button className="rounded-lg shadow-sm shadow-green-600 px-4 py-2 w-[200px]">
+                <div>                  
+                  <CallRoundedIcon className="text-[30px] "/>
+                  <p>Call</p>
+                </div>
+                </Button>
+              <Button className="rounded-lg shadow-sm shadow-green-600 px-4 py-2 w-[200px]">
+                <div>
+                  <DuoRoundedIcon className="text-[30px] "/>
+                  <p>Video</p>
+                </div>
+                </Button>
           </div>
         </div>
       </motion.div>

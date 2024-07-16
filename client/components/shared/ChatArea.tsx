@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
@@ -21,9 +21,21 @@ const ChatArea = () => {
   const { userId, setUserId, setUserName, userName, showUserDetails, setShowUserDetails } = useUserChat();
 
   // Here we fetch the messages through the api while loading first, using the userId taken by chatProvider.
-  // useEffect(()=>{
+  useEffect(()=>{
+    // Function for close chatArea using escape.
+    const handleKeyDown = (event:any) => {
+      if (event.key === 'Escape') {
+        closeChat();
+      }
+    };
+    if (userId) {
+      document.addEventListener('keydown', handleKeyDown);
+    }
 
-  // },[userId]);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  },[userId]);
 
   let checkChat = false;
   if (chat.length != 0) {
