@@ -16,6 +16,9 @@ const socketProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =
   // Have to use this userid for making the specific chatroom for one to one connection
   const { userId, userName } = useUserChat();
 
+  console.log(chat);
+  
+
   useEffect(() => {
     const socket = io(endpoints.socketEndpoint, {
       autoConnect: false,
@@ -26,16 +29,19 @@ const socketProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =
     async function getSenderId() {
       try {
         const senderId = await getCookiesData();
-        if (senderId){
-          socket.emit("join", senderId);
-        }
+        socket.emit("join", senderId);
+
         if (socket.connected){
-          socket.emit("send-message", { receipentId: userId, message: message });
+          const sms = message;
+          if (sms.trim() != ''){
+            socket.emit("send-message", { receipentId: userId, message: message, userId: senderId });
+          }
   
           socket.on("receive-message", (payload) => {
-            const msg = payload.trim();
-            if (msg != ''){
-              chats.push({ message: payload, isUser: false, userId: userId, userName: userName });
+            const msg = payload.message.trim();
+            if (msg != '' && senderId){
+              console.log("recieving message");              
+              chats.push({ message: payload.message, recieverId:payload.receipentId, senderId: payload.userId, userName: userName });
               setChat(chat.concat(chats));
             }
           });

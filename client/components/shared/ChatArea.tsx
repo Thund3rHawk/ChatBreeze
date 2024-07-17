@@ -16,26 +16,41 @@ const formSchema = z.object({
   message: z.string().max(500),
 });
 
-const ChatArea = () => {
+interface props {
+  senderId: string;
+}
+
+const ChatArea: React.FC<props> = ({ senderId }) => {
   const { chat, setMessage, setChat } = useChat();
   const { userId, setUserId, setUserName, userName, showUserDetails, setShowUserDetails } = useUserChat();
 
+  // Time Shower
+  let date = new Date();
+  let hours = date.getHours();
+  let minutes = date.getMinutes();
+  let ampm = hours >= 12 ? "PM" : "AM";
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+  minutes = minutes < 100 ? 0 + minutes : minutes;
+  let currentTime = hours + ":" + minutes + " " + ampm;
+
   // Here we fetch the messages through the api while loading first, using the userId taken by chatProvider.
-  useEffect(()=>{
+  useEffect(() => {
     // Function for close chatArea using escape.
-    const handleKeyDown = (event:any) => {
-      if (event.key === 'Escape') {
+    setMessage("");
+    const handleKeyDown = (event: any) => {
+      if (event.key === "Escape") {
         closeChat();
       }
     };
     if (userId) {
-      document.addEventListener('keydown', handleKeyDown);
+      document.addEventListener("keydown", handleKeyDown);
     }
 
     return () => {
-      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener("keydown", handleKeyDown);
     };
-  },[userId]);
+  }, [userId]);
 
   let checkChat = false;
   if (chat.length != 0) {
@@ -50,9 +65,9 @@ const ChatArea = () => {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     const msg = values.message.trim();
-    if (msg != ''){
+    if (msg != "") {
       setMessage(values.message);
-      const chats = [...chat, { message: values.message, isUser: true, userId: userId }];
+      const chats = [...chat, { message: values.message, recieverId: userId, senderId: senderId, time: currentTime }];
       setChat(chats);
       form.reset();
     }
@@ -68,14 +83,17 @@ const ChatArea = () => {
   }
 
   const userDetails = () => {
-    // here I have to show the user Card
-    // console.log(userId);
     setShowUserDetails(!showUserDetails);
   };
 
   return (
     <>
-      <motion.div className="flex flex-col" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{duration: 1.5}}>
+      <motion.div
+        className="flex flex-col"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.5 }}
+      >
         <div className="flex justify-between border-b border-muted pb-4">
           <div className="flex items-center justify-between">
             <Avatar className="mx-6" onClick={userDetails}>
@@ -97,24 +115,31 @@ const ChatArea = () => {
               <>
                 {chat.map((payload, index) => {
                   return (
-                    <div key={index} className={`flex ${payload.isUser ? "justify-end" : "justify-start"}`}>
-                      {payload.userId === userId ? (
-                        <div
-                          className={`${payload.isUser ? "bg-muted rounded-lg p-3 max-w-[70%] text-black" : "bg-green-700 rounded-lg p-3 max-w-[70%] text-primary-foreground"}`}
-                        >
-                          {!payload.isUser ? (
-                            <>
-                              <div className="font-bold">{userName}</div>
-                            </>
+                    <>
+                      {/* {!payload.isUser ? (
+                          <>
+                          <div className="font-bold text-orange-500">{userName}</div>
+                          </>
                           ) : (
                             ""
-                          )}
-                          <p className="">{payload.message}</p>
+                            )} */}
+
+                      {((payload.recieverId === senderId && payload.senderId === userId)|| (payload.recieverId === userId && payload.senderId === senderId)) ? (
+                        <div
+                          key={index}
+                          className={`flex ${payload.recieverId === userId ? "justify-end" : "justify-start"} !m-0`}
+                        >
+                          <div
+                            className={`${payload.recieverId === userId ? "bg-muted text-black" : "bg-[#015b6f] text-primary-foreground"} rounded-md py-1 px-3 max-w-[70%] flex justify-between items-end my-1`}
+                          >
+                            <p className="me-3">{payload.message}</p>
+                            <p className="text-[10px] text-gray-400">{currentTime}</p>
+                          </div>
                         </div>
                       ) : (
                         ""
                       )}
-                    </div>
+                    </>
                   );
                 })}
               </>
@@ -131,7 +156,13 @@ const ChatArea = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Input placeholder="Enter Message" {...field} type="text" className="w-[55vw] ms-5" autoComplete="off"/>
+                        <Input
+                          placeholder="Enter Message"
+                          {...field}
+                          type="text"
+                          className="w-[55vw] ms-5"
+                          autoComplete="off"
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>

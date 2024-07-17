@@ -1,4 +1,5 @@
 import { Server } from "socket.io"
+import prisma from "../db";
 import { createAdapter } from "@socket.io/mongo-adapter";
 import { MongoClient } from "mongodb";
 
@@ -19,40 +20,55 @@ export class SocketService {
         });
     }
 
-    // we can send message to the particular user using this userID
     public async sendMessage() {
         const io = this.io;
         await mongoClient.connect();
 
-        try {
-            await mongoClient.db(DB).createCollection(COLLECTION, {
-                capped: true,
-                size: 1e6
-            });
-        } catch (e) {
-            console.log("mongo adapter error", e);            
-        }
+        // try {
+        //     await mongoClient.db(DB).createCollection(COLLECTION, {
+        //         capped: true,
+        //         size: 1e6
+        //     });
+        // } catch (e) {
+        //     console.log("mongo adapter error", e);            
+        // }
 
         const mongoCollection = mongoClient.db(DB).collection(COLLECTION);
         io.adapter(createAdapter(mongoCollection));
 
 
         io.on("connection", (socket) => {
-            // here i have to save the message into the db for that particular user.
 
             socket.on('join', (userId: string) => {
-                // Validate the userId and fetch the user from MongoDB
                 socket.join(userId);
                 console.log(`User ${userId} joined with socket id ${socket.id}`);
             });
 
 
-            socket.on('send-message', (reciever) => {
-                const { receipentId, message } = reciever;
-                // Validate the userId and fetch the user from MongoDB                
+            socket.on('send-message', async (reciever) => {
+                const { receipentId, message, userId } = reciever;
+           
                 if (receipentId) {
-                    io.to(receipentId).emit('receive-message',message);
+                    io.to(receipentId).emit('receive-message',{message,userId, receipentId});
                     console.log(`Reciepent ${receipentId} is online and the message is ${message}`);
+
+                    // Save the message to MongoDB
+                    try {
+                        if (message.trim() != ''){
+                            await prisma.messages.create({
+                                data:{
+                                    senderId: userId,
+                                    recieverId :receipentId,
+                                    message: message,
+                                    timeStamp: new Date()
+                                }
+                            });
+                            console.log("Message saved to MongoDB");
+                        }
+
+                    } catch (e) {
+                        console.log("Error saving message to MongoDB", e);
+                    }
                 }
                 else {
                     console.log(`Reciepent ${receipentId} is offline`);

@@ -5,14 +5,18 @@ import useUserChat from "@/hooks/useUserChat";
 import UserDashBoard from "./UserDashBoard";
 import {motion} from 'framer-motion'
 
-const RightSection = () => {
+interface props {
+  senderId: string,
+}
+
+const RightSection: React.FC<props> = ({senderId}) => {
   // Have to find the userID from a context provider while click the button of the particular username from the left section.
   //here i can fetch the chats using this particular userId.
   const { showUserDetails } = useUserChat();
 
   return (
     <motion.div className="w-[65vw] h-[90vh] rounded-3xl mx-10" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{duration: 1.5}}>
-      <SocketProvider>{showUserDetails ? <UserDashBoard /> : <ChatArea />}</SocketProvider>
+      <SocketProvider>{showUserDetails ? <UserDashBoard /> : <ChatArea senderId={senderId}/>}</SocketProvider>
     </motion.div>
   );
 };

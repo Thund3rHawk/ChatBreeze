@@ -9,7 +9,7 @@ const Home = ({ params }: { params: { slug: string } }) => {
   return (
     <div className={`${theme} h-screen`}>
       <Navbar />
-      <HomePage />
+      <HomePage senderId= {params.slug}/>
     </div>
   );
 };

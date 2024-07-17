@@ -2,8 +2,8 @@ import React, { SetStateAction } from "react";
 
 export type chatMessageType = {
     message: string,
-    isUser: boolean,
-    userId?: string,
+    recieverId: string,
+    senderId: string,
     userName?: string,
     time?: string
 }
