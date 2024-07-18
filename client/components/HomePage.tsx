@@ -9,7 +9,6 @@ interface props{
   senderId : string
 }
 
-
 const HomePage:React.FC<props> = ({senderId}) => {
   return (
     <>

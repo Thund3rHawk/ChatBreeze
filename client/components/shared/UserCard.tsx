@@ -5,13 +5,15 @@ import useUserChat from "@/hooks/useUserChat";
 interface props {
   name: string;
   userId: string;
+  contactObjectId: string;
 }
-const UserCard: React.FC<props> = ({ name, userId }) => {
-  const { setUserId, setUserName } = useUserChat();
+const UserCard: React.FC<props> = ({ name, userId, contactObjectId }) => {
+  const { setUserId, setUserName, setContactObjectId } = useUserChat();
   const openChat = () => {
     // Have to pass the userid into the right section.
     setUserId(userId);
     setUserName(name);
+    setContactObjectId (contactObjectId);
   };
 
   return (

@@ -10,8 +10,6 @@ interface props {
 }
 
 const RightSection: React.FC<props> = ({senderId}) => {
-  // Have to find the userID from a context provider while click the button of the particular username from the left section.
-  //here i can fetch the chats using this particular userId.
   const { showUserDetails } = useUserChat();
 
   return (

@@ -13,11 +13,9 @@ const socketProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =
   const [chat, setChat] = useState<chatMessageType[]>([]);
   const [message, setMessage] = useState<string>('');
 
-  // Have to use this userid for making the specific chatroom for one to one connection
   const { userId, userName } = useUserChat();
 
-  console.log(chat);
-  
+  console.log(chat);  
 
   useEffect(() => {
     const socket = io(endpoints.socketEndpoint, {

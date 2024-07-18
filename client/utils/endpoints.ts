@@ -7,4 +7,5 @@ export const endpoints = {
     getContactDetails: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/getContacts`,
     message: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/message`,
     uesrDetailsUpdate: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/detailsUpdate`,
+    updateContactName: `${process.env.NEXT_PUBLIC_API_ENDPOINT}/contactNameUpdate`,
 }

@@ -32,6 +32,8 @@ export type authContextType = {
 export type chatProviderType = {
     userId: string,
     setUserId: React.Dispatch<SetStateAction<string>>,
+    contactObjectId: string,
+    setContactObjectId: React.Dispatch<SetStateAction<string>>,
     userName: string,
     setUserName: React.Dispatch<SetStateAction<string>>,
     showUserDetails: boolean,

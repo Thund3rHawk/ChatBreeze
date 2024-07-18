@@ -6,6 +6,8 @@ import Image from "next/image";
 import ChatRoundedIcon from '@mui/icons-material/ChatRounded';
 import CallRoundedIcon from '@mui/icons-material/CallRounded';
 import DuoRoundedIcon from '@mui/icons-material/DuoRounded';
+import { ChangeContactNameForm } from "./ChangeContactNameForm";
+
 
 const UserDashBoard = () => {
   const { setShowUserDetails, showUserDetails, userName, userImage } = useUserChat();
@@ -38,7 +40,10 @@ const UserDashBoard = () => {
         </div>
         <div className="h-full w-full flex flex-col justify-center items-center">
           <Image src={userImage} alt="@shadcn" className="rounded-full" width={200} height={200} />
-          <h1 className="m-5 text-[25px]">{userName}</h1>
+          <div className="flex items-center">
+            <h1 className="my-5 ms-4 text-[25px]">{userName}</h1>
+            <ChangeContactNameForm/>
+          </div>
           <p className="my-4 w-[35vw]">Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto laborum unde nemo cumque molestias illum molestiae tempora cum quam maxime!</p>
           <div className="flex justify-between w-[40vw] border-t border-muted p-4">
               <Button className="rounded-lg shadow-sm shadow-green-600 px-4 py-2 w-[200px]" onClick={closeUserDashboard}>

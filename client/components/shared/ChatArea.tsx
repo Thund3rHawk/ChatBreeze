@@ -23,12 +23,12 @@ interface props {
 const ChatArea: React.FC<props> = ({ senderId }) => {
   const { chat, setMessage, setChat } = useChat();
   const { userId, setUserId, setUserName, userName, showUserDetails, setShowUserDetails } = useUserChat();
-
+  
   // Time Shower
   let date = new Date();
   let hours = date.getHours();
   let minutes = date.getMinutes();
-  let ampm = hours >= 12 ? "PM" : "AM";
+  let ampm = hours >= 12 ? "pm" : "am";
   hours = hours % 12;
   hours = hours ? hours : 12; // the hour '0' should be '12'
   minutes = minutes < 100 ? 0 + minutes : minutes;

@@ -1,4 +1,5 @@
 import UserCard from "@/components/shared/UserCard";
+import useUserChat from "@/hooks/useUserChat";
 import { addUserContextType } from "@/types";
 import { endpoints } from "@/utils/endpoints";
 import { getCookiesData } from "@/utils/getCookiesData";
@@ -9,6 +10,8 @@ export const addUserContext = createContext<addUserContextType>({ userCard: [], 
 
 const addUserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [userCard, setUserCard] = useState<React.ReactNode[]>([]);
+  const {userName} = useUserChat();
+
   useEffect(() => {
     async function fetchData() {
       const userId = await getCookiesData();
@@ -18,13 +21,13 @@ const addUserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) 
       const updateUserCard = user.map((item: any) => {
         const name = item.name;
         if (userId === item.userId) {
-          return <UserCard name={name} userId={item.contactId} />;
+          return <UserCard name={name} userId={item.contactId} contactObjectId= {item.id}/>;
         }
       });
       setUserCard(updateUserCard);
     }
     fetchData();
-  }, []);
+  },[]);
 
   return <addUserContext.Provider value={{ userCard, setUserCard }}>{children}</addUserContext.Provider>;
 };
