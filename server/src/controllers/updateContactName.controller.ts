@@ -14,11 +14,12 @@ const updateContactName = asyncHandler (async (req:Request,res:Response)=>{
             }
         })
         res.send ({
-            message: "contact name updated successfully",            
+            message: "contact name updated successfully",  
+            user: user          
         })
     } catch (error) {
         res.send (error);
-        console.log ("updateConatact Name error")
+        console.log ("updateConatact Name error", error);
     }
 })
 

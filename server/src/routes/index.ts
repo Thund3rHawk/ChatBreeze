@@ -5,6 +5,7 @@ import { verifyOtp } from '../controllers/verifyOtp.controller';
 import { addUser } from '../controllers/addUser.controller';
 import { getContacts } from '../controllers/getContacts.controller';
 import { userDetailsUpdate } from '../controllers/userDetailsUpdate.controller';
+import { updateContactName } from '../controllers/updateContactName.controller';
 
 const router = express.Router();
 
@@ -25,5 +26,8 @@ router.route('/getContacts').post(getContacts);
 
 // UserDetails Update Route
 router.route('/detailsUpdate').post(userDetailsUpdate);
+
+// Update Contact Name Route
+router.route('/contactNameUpdate').post (updateContactName);
 
 export {router};

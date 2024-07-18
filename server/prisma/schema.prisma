@@ -35,7 +35,7 @@ model Messages {
   message String
   senderId      String
   recieverId    String
-  timeStamp     DateTime
+  timeStamp     String
 }
 
 model otpSchema {

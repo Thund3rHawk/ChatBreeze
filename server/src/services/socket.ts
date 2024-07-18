@@ -2,6 +2,7 @@ import { Server } from "socket.io"
 import prisma from "../db";
 import { createAdapter } from "@socket.io/mongo-adapter";
 import { MongoClient } from "mongodb";
+import { time } from "../utils/dateTime";
 
 const DB = "messages";
 const COLLECTION = "socket.io-adapter-events";
@@ -16,7 +17,8 @@ export class SocketService {
         this._io = new Server({
             cors: {
                 origin: '*'
-            }
+            },
+            transports: ['polling']
         });
     }
 
@@ -24,18 +26,8 @@ export class SocketService {
         const io = this.io;
         await mongoClient.connect();
 
-        // try {
-        //     await mongoClient.db(DB).createCollection(COLLECTION, {
-        //         capped: true,
-        //         size: 1e6
-        //     });
-        // } catch (e) {
-        //     console.log("mongo adapter error", e);            
-        // }
-
         const mongoCollection = mongoClient.db(DB).collection(COLLECTION);
         io.adapter(createAdapter(mongoCollection));
-
 
         io.on("connection", (socket) => {
 
@@ -43,7 +35,6 @@ export class SocketService {
                 socket.join(userId);
                 console.log(`User ${userId} joined with socket id ${socket.id}`);
             });
-
 
             socket.on('send-message', async (reciever) => {
                 const { receipentId, message, userId } = reciever;
@@ -60,7 +51,7 @@ export class SocketService {
                                     senderId: userId,
                                     recieverId :receipentId,
                                     message: message,
-                                    timeStamp: new Date()
+                                    timeStamp: time(),
                                 }
                             });
                             console.log("Message saved to MongoDB");
