@@ -6,7 +6,7 @@ import useTheme from "@/hooks/useTheme";
 import axios from "axios";
 import { endpoints } from "@/utils/endpoints";
 
-const page = ({ params }: { params: { slug: string } }) => {
+const Setting = ({ params }: { params: { slug: string } }) => {
   const { theme } = useTheme();
   const [userName, setUserName] = useState<string>("");
   const [name, setName] = useState<string>("");
@@ -40,4 +40,4 @@ const page = ({ params }: { params: { slug: string } }) => {
   );
 };
 
-export default page;
+export default Setting;
