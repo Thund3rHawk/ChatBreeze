@@ -20,7 +20,6 @@ const socketProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =
   useEffect(() => {
     const socket = io(endpoints.socketEndpoint, {
       autoConnect: false,
-      transports: ['websocket']
     });
     socketRef.current = socket;
     socket.connect();

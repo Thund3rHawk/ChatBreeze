@@ -18,7 +18,6 @@ export class SocketService {
             cors: {
                 origin: '*'
             },
-            transports: ['websocket']
         });
     }
 
