@@ -18,7 +18,7 @@ export class SocketService {
             cors: {
                 origin: '*'
             },
-            transports: ['polling']
+            transports: ['websocket']
         });
     }
 
@@ -44,22 +44,22 @@ export class SocketService {
                     console.log(`Reciepent ${receipentId} is online and the message is ${message}`);
 
                     // Save the message to MongoDB
-                    try {
-                        if (message.trim() != ''){
-                            await prisma.messages.create({
-                                data:{
-                                    senderId: userId,
-                                    recieverId :receipentId,
-                                    message: message,
-                                    timeStamp: time(),
-                                }
-                            });
-                            console.log("Message saved to MongoDB");
-                        }
+                    // try {
+                    //     if (message.trim() != ''){
+                    //         await prisma.messages.create({
+                    //             data:{
+                    //                 senderId: userId,
+                    //                 recieverId :receipentId,
+                    //                 message: message,
+                    //                 timeStamp: time(),
+                    //             }
+                    //         });
+                    //         console.log("Message saved to MongoDB");
+                    //     }
 
-                    } catch (e) {
-                        console.log("Error saving message to MongoDB", e);
-                    }
+                    // } catch (e) {
+                    //     console.log("Error saving message to MongoDB", e);
+                    // }
                 }
                 else {
                     console.log(`Reciepent ${receipentId} is offline`);
