@@ -9,3 +9,5 @@ async function main() {
     console.error('Error running migrations:', error);
   }
 }
+
+main();
