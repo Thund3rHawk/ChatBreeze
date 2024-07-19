@@ -110,7 +110,7 @@ function Verify({ params }: { params: { slug: string } }) {
           </form>
         </Form>
         <div className="text-center">
-          Didn't get an OTP &nbsp;
+          Didn&lsquo; t get an OTP &nbsp;
           <button onClick={sendNewOtp} className="text-violet-600">
             Send OTP
           </button>
