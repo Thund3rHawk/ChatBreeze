@@ -19,7 +19,7 @@ const socketProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =
 
   useEffect(() => {
     const socket = io(endpoints.socketEndpoint, {
-      autoConnect: false,
+      // autoConnect: false,
     });
     socketRef.current = socket;
     socket.connect();
