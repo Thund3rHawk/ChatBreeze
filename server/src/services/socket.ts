@@ -16,8 +16,11 @@ export class SocketService {
         console.log("Socket is connected");
         this._io = new Server({
             cors: {
-                origin: '*'
+                origin: '*',
+                methods: ['GET', 'POST'],
+                credentials: true,
             },
+            transports: ['websocket']
         });
     }
 
