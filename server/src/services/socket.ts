@@ -7,11 +7,7 @@ import { time } from "../utils/dateTime";
 const DB = "messages";
 const COLLECTION = "socket.io-adapter-events";
 
-const dbURL = process.env.DATABASE_URL;
-if (!dbURL) {
-    throw new Error('DATABASE_URL is not defined');
-}
-const mongoClient = new MongoClient(dbURL);
+const mongoClient = new MongoClient(process.env.DATABASE_URL as string);
 
 export class SocketService {
     private _io: Server;

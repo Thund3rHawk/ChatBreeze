@@ -1,7 +1,5 @@
 import nodemailer from 'nodemailer'
-import dotenv from 'dotenv';
 
-dotenv.config();
 
 const userEmail = process.env.AUTH_EMAIL;
 const password = process.env.AUTH_EMAIL_PASS;
