@@ -1,6 +1,5 @@
 import nodemailer from 'nodemailer'
 
-
 const userEmail = process.env.AUTH_EMAIL;
 const password = process.env.AUTH_EMAIL_PASS;
 
