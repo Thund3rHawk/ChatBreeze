@@ -5,11 +5,11 @@ import RightSection from "./shared/RightSection";
 import AddUserProvider from "@/context/addUserProvider";
 import ChatProvider from "@/context/chatProvider";
 
-interface props{
-  senderId : string
+interface props {
+  senderId: string;
 }
 
-const HomePage:React.FC<props> = ({senderId}) => {
+const HomePage: React.FC<props> = ({ senderId }) => {
   return (
     <>
       <ChatProvider>
@@ -20,7 +20,7 @@ const HomePage:React.FC<props> = ({senderId}) => {
             </div>
             <div className="border border-muted h-[90vh]"></div>
             <div className="flex-1">
-              <RightSection senderId= {senderId}/>
+              <RightSection senderId={senderId} />
             </div>
           </div>
         </AddUserProvider>

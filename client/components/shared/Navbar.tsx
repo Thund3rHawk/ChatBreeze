@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -41,7 +41,7 @@ export default function Navbar() {
 
   const openSetting = async () => {
     const userId = await getCookiesData();
-    route.push(`/setting/${userId}`)
+    route.push(`/setting/${userId}`);
   };
 
   return (
@@ -87,7 +87,7 @@ export default function Navbar() {
               Logout <LogoutRoundedIcon />
             </DropdownMenuItem>
           </DropdownMenuContent>
-        </DropdownMenu>       
+        </DropdownMenu>
       </div>
     </header>
   );

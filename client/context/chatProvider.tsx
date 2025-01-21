@@ -12,8 +12,8 @@ export const ChatContext = createContext<chatProviderType>({
   setUserName: () => {},
   showUserDetails: false,
   setShowUserDetails: () => {},
-  userImage: '',
-  setUserImage: ()=>{},
+  userImage: "",
+  setUserImage: () => {},
 });
 
 const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -27,20 +27,33 @@ const ChatProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => 
     setShowUserDetails(false);
   }, [userId]);
 
-  useEffect (()=>{
-    async function changeName (){
-      if (contactObjectId != ''){
-        await axios.post (endpoints.updateContactName, {
+  useEffect(() => {
+    async function changeName() {
+      if (contactObjectId != "") {
+        await axios.post(endpoints.updateContactName, {
           contactObjectId: contactObjectId,
-          name: userName
-        })
+          name: userName,
+        });
       }
     }
     changeName();
-  }, [userName])
+  }, [userName]);
 
   return (
-    <ChatContext.Provider value={{ userId, setUserId, userName, setUserName, showUserDetails, setShowUserDetails, userImage, setUserImage, contactObjectId, setContactObjectId }}>
+    <ChatContext.Provider
+      value={{
+        userId,
+        setUserId,
+        userName,
+        setUserName,
+        showUserDetails,
+        setShowUserDetails,
+        userImage,
+        setUserImage,
+        contactObjectId,
+        setContactObjectId,
+      }}
+    >
       {children}
     </ChatContext.Provider>
   );

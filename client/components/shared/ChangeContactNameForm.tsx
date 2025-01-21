@@ -33,7 +33,9 @@ export function ChangeContactNameForm() {
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Change Contact Name</DialogTitle>
-          <DialogDescription>Make changes to your contact name here. Click save when you&lsquo;re done.</DialogDescription>
+          <DialogDescription>
+            Make changes to your contact name here. Click save when you&lsquo;re done.
+          </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">

@@ -23,7 +23,7 @@ interface props {
 const ChatArea: React.FC<props> = ({ senderId }) => {
   const { chat, setMessage, setChat } = useChat();
   const { userId, setUserId, setUserName, userName, showUserDetails, setShowUserDetails } = useUserChat();
-  
+
   // Time Shower
   let date = new Date();
   let hours = date.getHours();
@@ -124,7 +124,8 @@ const ChatArea: React.FC<props> = ({ senderId }) => {
                             ""
                             )} */}
 
-                      {((payload.recieverId === senderId && payload.senderId === userId)|| (payload.recieverId === userId && payload.senderId === senderId)) ? (
+                      {(payload.recieverId === senderId && payload.senderId === userId) ||
+                      (payload.recieverId === userId && payload.senderId === senderId) ? (
                         <div
                           key={index}
                           className={`flex ${payload.recieverId === userId ? "justify-end" : "justify-start"} !m-0`}

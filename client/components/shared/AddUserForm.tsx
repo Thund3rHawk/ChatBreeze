@@ -48,8 +48,16 @@ const AddUserForm = () => {
         });
         return;
       }
-      // console.log(res.data);      
-      const addUserCard = [...userCard, <UserCard key = {res.data.userId} name={values.username} userId={res.data.userId} contactObjectId= {res.data.contactObjectId}/>];
+      // console.log(res.data);
+      const addUserCard = [
+        ...userCard,
+        <UserCard
+          key={res.data.userId}
+          name={values.username}
+          userId={res.data.userId}
+          contactObjectId={res.data.contactObjectId}
+        />,
+      ];
       setUserCard(addUserCard);
       toast({
         title: "User Added Successfully",

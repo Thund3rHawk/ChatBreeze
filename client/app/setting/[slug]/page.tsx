@@ -35,7 +35,11 @@ const Setting = ({ params }: { params: { slug: string } }) => {
   return (
     <div className={`${theme} h-screen`}>
       <Navbar />
-      {userName != "" ? <UpdateUserDetails userId={params.slug} username={userName} Email= {email} Bio = {bio} Name= {name} /> : <div>Loading</div>}
+      {userName != "" ? (
+        <UpdateUserDetails userId={params.slug} username={userName} Email={email} Bio={bio} Name={name} />
+      ) : (
+        <div>Loading</div>
+      )}
     </div>
   );
 };

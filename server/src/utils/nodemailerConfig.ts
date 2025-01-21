@@ -1,44 +1,43 @@
-import nodemailer from 'nodemailer'
+import nodemailer from "nodemailer";
 
 const userEmail = process.env.AUTH_EMAIL;
 const password = process.env.AUTH_EMAIL_PASS;
 
-export const transporter = nodemailer.createTransport ({
-    host: 'smtp.gmail.com',  
-    port: 465,
-    secure: true,  
-    auth:{
-        user: userEmail,
-        pass: password,
-    },
-    tls: {
-        rejectUnauthorized: false,
-    },
-})
+export const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
+  auth: {
+    user: userEmail,
+    pass: password,
+  },
+  tls: {
+    rejectUnauthorized: false,
+  },
+});
 
-transporter.verify ((err, success)=>{
-    if (err){
-        console.log ("Verify Error:", err);
+transporter.verify((err, success) => {
+  if (err) {
+    console.log("Verify Error:", err);
+  } else {
+    console.log("Ready for message");
+    console.log(success);
+  }
+});
+
+export function sendEmail(email: string, otp: string) {
+  const mailOptions = {
+    from: userEmail,
+    to: email,
+    subject: "Verify OTP",
+    html: `<p>OTP for ChatBreeze is <b>${otp}</b> </p>`,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent: " + info.response);
     }
-    else{
-        console.log ("Ready for message")
-        console.log (success);
-    }
-})
-
-export function sendEmail(email:string, otp: string) {
-    const mailOptions = {
-        from: userEmail, 
-        to: email,
-        subject: 'Verify OTP',
-        html: `<p>OTP for ChatBreeze is <b>${otp}</b> </p>`
-    };
-
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            console.log(error);
-        } else {
-            console.log('Email sent: ' + info.response);
-        }
-    });
+  });
 }

@@ -8,39 +8,44 @@ import { Socket, io } from "socket.io-client";
 
 export const socketContext = createContext<chatContextType | null>(null);
 
-const socketProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {  
+const socketProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const socketRef = useRef<Socket | null>();
   const [chat, setChat] = useState<chatMessageType[]>([]);
-  const [message, setMessage] = useState<string>('');
+  const [message, setMessage] = useState<string>("");
 
   const { userId, userName } = useUserChat();
 
-  console.log(chat);  
+  console.log(chat);
 
   useEffect(() => {
     const socket = io(endpoints.socketEndpoint, {
       autoConnect: false,
-      transports: ['websocket']
+      transports: ["websocket"],
     });
     socketRef.current = socket;
     socket.connect();
-    const chats: chatMessageType[] = ([]);
+    const chats: chatMessageType[] = [];
     async function getSenderId() {
       try {
         const senderId = await getCookiesData();
         socket.emit("join", senderId);
 
-        if (socket.connected){
+        if (socket.connected) {
           const sms = message;
-          if (sms.trim() != ''){
+          if (sms.trim() != "") {
             socket.emit("send-message", { receipentId: userId, message: message, userId: senderId });
           }
-  
+
           socket.on("receive-message", (payload) => {
             const msg = payload.message.trim();
-            if (msg != '' && senderId){
-              console.log("recieving message");              
-              chats.push({ message: payload.message, recieverId:payload.receipentId, senderId: payload.userId, userName: userName });
+            if (msg != "" && senderId) {
+              console.log("recieving message");
+              chats.push({
+                message: payload.message,
+                recieverId: payload.receipentId,
+                senderId: payload.userId,
+                userName: userName,
+              });
               setChat(chat.concat(chats));
             }
           });
@@ -55,7 +60,7 @@ const socketProvider: React.FC<{ children: React.ReactNode }> = ({ children }) =
       socket.disconnect();
       socketRef.current = null;
     };
-  },[userId,message]);
+  }, [userId, message]);
 
   return (
     <>

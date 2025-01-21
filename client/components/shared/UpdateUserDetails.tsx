@@ -21,14 +21,14 @@ const formSchema = z.object({
 });
 
 interface props {
-  userId: string,
-  username: string,
-  Name: string,
-  Email: string,
-  Bio: string,
+  userId: string;
+  username: string;
+  Name: string;
+  Email: string;
+  Bio: string;
 }
 
-const UpdateUserDetails: React.FC<props> = ({ userId,username, Name, Email, Bio }) => {
+const UpdateUserDetails: React.FC<props> = ({ userId, username, Name, Email, Bio }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [avatarUrl, setAvatarUrl] = useState<any>("https://github.com/shadcn.png");
   const form = useForm<z.infer<typeof formSchema>>({
@@ -55,16 +55,13 @@ const UpdateUserDetails: React.FC<props> = ({ userId,username, Name, Email, Bio 
 
       toast({
         title: "User Details Update Message",
-        description: `${response.data.message}`
-      })
-
-
+        description: `${response.data.message}`,
+      });
     } catch (error) {
       toast({
         variant: "destructive",
         title: "User Details Update Error",
-      })
-
+      });
     }
   }
 
@@ -113,7 +110,7 @@ const UpdateUserDetails: React.FC<props> = ({ userId,username, Name, Email, Bio 
                       }}
                     />
                     <div onClick={handleFileInputClick} className="cursor-pointer">
-                      <CameraAltRoundedIcon/>
+                      <CameraAltRoundedIcon />
                     </div>
                   </>
                 </FormControl>

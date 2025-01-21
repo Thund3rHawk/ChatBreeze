@@ -13,7 +13,7 @@ const UserCard: React.FC<props> = ({ name, userId, contactObjectId }) => {
     // Have to pass the userid into the right section.
     setUserId(userId);
     setUserName(name);
-    setContactObjectId (contactObjectId);
+    setContactObjectId(contactObjectId);
   };
 
   return (
