@@ -1,0 +1,47 @@
+name: Build and Deploy Preview
+
+on:
+  pull_request:
+    branches:
+      - main  # Adjust if needed
+
+jobs:
+  build-preview:
+    name: Build and Deploy Preview
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18  # Adjust to match your Next.js version
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: |
+          cd apps/website
+          npm ci
+
+      - name: Build Next.js application
+        run: |
+          cd apps/website
+          npm run build
+
+      - name: Deploy to Vercel (Preview)
+        id: deploy
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prod false'  # Deploy as preview
+          working-directory: apps/website
+
+      - name: Add preview URL as PR comment
+        uses: thollander/actions-comment-pull-request@v2
+        with:
+          message: "🚀 Preview deployment ready: ${{ steps.deploy.outputs.preview-url }}"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
