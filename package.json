@@ -2,9 +2,9 @@
   "name": "socket.io",
   "version": "1.0.0",
   "description": "ChatBreeze Backend",
-  "main": "src/index.ts",
+  "main": "index.ts",
   "scripts": {
-    "dev": "ts-node src/index.ts",
+    "dev": "ts-node index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
     "db:migrate": "NODE_PATH=dist/ node --env-file=.env dist/db/migration.js"

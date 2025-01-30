@@ -16,12 +16,29 @@ Welcome to the Full Stack Chat Application! This project is a real-time chat app
 - Message notifications
 
 
+## Environment Variables
+
+To run this client, you will need to add the following environment variables to your .env file inside client directory
+
+`NEXT_PUBLIC_API_ENDPOINT`
+
+To run this server, you will need to add the following environment variables to your .env file inside server directory
+
+`PORT = http://localhost:8080`
+
+`DATABASE_URL = mongodb+srv://<username>:<db_password>@<host>/chatbreeze?<options>`
+
+`AUTH_EMAIL`
+
+`AUTH_EMAIL_PASS`
+
+
 ## Run Locally
 
 
 **Prerequisites**
 
-- Node.js (>=14.x)
+- Node.js (>=18.x)
 - MongoDB
 - Git
 
@@ -40,34 +57,17 @@ Go to the project directory
 Install client and run with npm
 
 ```bash
-  cd client
+  cd apps/website
   npm install
   npm run dev
 ```
 
 Open another terminal and install server and run with npm
 ```bash
-  cd server
   npm install
-  npm start
+  npx prisma generate
+  npm run dev
 ```
-
-## Environment Variables
-
-To run this client, you will need to add the following environment variables to your .env file inside client directory
-
-`NEXT_PUBLIC_API_ENDPOINT`
-
-To run this server, you will need to add the following environment variables to your .env file inside server directory
-
-`PORT`
-
-`DATABASE_URL`
-
-`AUTH_EMAIL`
-
-`AUTH_EMAIL_PASS`
-
 
 
 ## Usage
@@ -85,13 +85,10 @@ To run this server, you will need to add the following environment variables to 
    - Receive notifications for new messages.
 ## Contributing
 
-Contributions are always welcome!
+Contributions are always welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to contribute.
 
-- Fork the repository.
-- Create a new branch for your feature or bugfix.
-- Commit your changes and push them to your fork.
-- Open a pull request to the main repository.
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+
 
