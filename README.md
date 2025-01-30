@@ -18,13 +18,13 @@ Welcome to the Full Stack Chat Application! This project is a real-time chat app
 
 ## Environment Variables
 
-To run this client, you will need to add the following environment variables to your .env file inside client directory
+To run the website, you will need to add the following environment variables to your .env file inside app/website directory
 
-`NEXT_PUBLIC_API_ENDPOINT`
+`NEXT_PUBLIC_API_ENDPOINT =  http://localhost:8080`
 
-To run this server, you will need to add the following environment variables to your .env file inside server directory
+To run the server, you will need to add the following environment variables to your .env file inside root directory
 
-`PORT = http://localhost:8080`
+`PORT = 8080`
 
 `DATABASE_URL = mongodb+srv://<username>:<db_password>@<host>/chatbreeze?<options>`
 
