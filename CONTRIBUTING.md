@@ -25,6 +25,7 @@ Thank you for your interest in contributing to ChatBreeze! We welcome contributi
 ### Code Style Requirements
 
 1. **Formatting**
+
    - Before submitting your PR, run Prettier in any client or server directory where you've made changes:
      ```bash
      npx prettier . --write
@@ -37,7 +38,7 @@ Thank you for your interest in contributing to ChatBreeze! We welcome contributi
      const MyComponent = () => {
        const [state, setState] = useState(null);
        return <div>{state}</div>;
-     }
+     };
      ```
    - Avoid:
      ```javascript
@@ -72,6 +73,7 @@ Thank you for your interest in contributing to ChatBreeze! We welcome contributi
 ### Code Review Checklist
 
 Before submitting your PR, ensure:
+
 - Code is formatted with Prettier
 - Only functional components are used
 - All new code has proper documentation
@@ -83,6 +85,7 @@ Before submitting your PR, ensure:
 ### Visual Documentation Guidelines
 
 #### When to Include Visuals
+
 - UI component changes
 - New features with visual elements
 - Layout modifications
@@ -90,7 +93,9 @@ Before submitting your PR, ensure:
 - Responsive design implementations (screenshots at multiple breakpoints)
 
 #### Best Practices for Visuals
+
 1. **Screenshots**
+
    - Capture the entire relevant window/component
    - Use high-resolution images
    - Highlight important changes if necessary
@@ -103,6 +108,7 @@ Before submitting your PR, ensure:
 ## Need Help?
 
 If you have questions or need help, please:
+
 1. Check existing issues and discussions
 2. Create a new issue with the "question" label
 3. Be specific about what you're trying to accomplish

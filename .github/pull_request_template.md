@@ -1,4 +1,3 @@
-
 <!-- In order to keep off topic discussion to a minimum, it helps if the "work to be done" is already agreed on. -->
 <!-- Ideally, a GitHub Issue with the label `Status: Consensus` will have been concluded, and linked to in this PR. -->
 <!--
@@ -10,9 +9,10 @@ Thanks for submitting a pull request! Please provide enough information so that 
 <!-- E.g. a bugfix, feature, refactoring, etc… -->
 
 **Issue Number:**
-<!-- Pick one of the below options.  Please remove those which don't apply. -->
--  Closes #___ <!-- Replace ___ with the issue number this PR resolves -->
 
+<!-- Pick one of the below options.  Please remove those which don't apply. -->
+
+- Closes #**_ <!-- Replace _** with the issue number this PR resolves -->
 
 **Screenshots/videos:**
 
