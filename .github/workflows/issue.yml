@@ -25,5 +25,5 @@ jobs:
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           issue-message: |
-            Welcome to the ChatBreeze Community. We are so excited you are here! Thanks a lot for reporting your first issue!! 🎉🎉 Please make sure to take a look at our [contributors guide](https://github.com/thund3rhawk/ChatBreeze/CONTRIBUTING.md) if you plan on opening a pull request. 
+            Welcome to the ChatBreeze Community. We are so excited you are here! Thanks a lot for reporting your first issue!! 🎉 Please make sure to take a look at our [contributors guide](https://github.com/thund3rhawk/ChatBreeze/CONTRIBUTING.md) if you plan on opening a pull request. 
             For more details, check out the [README.md](https://github.com/thund3rhawk/ChatBreeze/README.md) file.
