@@ -13,7 +13,7 @@ const OTP = randomstring.generate({
 const signUp = asyncHandler(async (req: Request, res: Response) => {
   const { email, username, password } = req.body;
   try {
-    prisma.$connect;
+    // prisma.$connect;
     bcrypt.genSalt(10, function (err, salt) {
       if (err) {
         console.log("Bcrypt Error: ", err);
