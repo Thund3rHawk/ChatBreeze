@@ -1,88 +1,128 @@
-# ChatBreeze
+🚀 ChatBreeze
+=============
 
-Welcome to the Full Stack Chat Application! This project is a real-time chat application built using modern web technologies. The app supports multiple users, private and group messaging, and is designed to be scalable and maintainable.
+Welcome to **ChatBreeze**, a full-stack real-time chat application built with modern web technologies. This app supports multiple users, private and group messaging, and is designed to be **scalable** and **maintainable**. 💬✨
 
-## Features
+📜 Table of Contents
+--------------------
 
-- Real-time messaging
-- Private and group chats
-- User authentication and authorization
-- Two step verification
-- Profile management
-- Message notifications
+*   [🌟 Features](#-features)
+*   [🛠️ Technologies Used](#️-technologies-used)
+*   [⚙️ Environment Variables](#️-environment-variables)
+*   [💻 Run Locally](#-run-locally)
+*   [🚀 Usage](#-usage)
+*   [🤝 Contributing](#-contributing)
+*   [📜 License](#-license)
+    
 
-## Environment Variables
+🌟 Features
+-----------
 
-To run the website, you will need to add the following environment variables to your .env file inside app/website directory
+*   **Real-time Messaging** 🔥
+*   **User Authentication and Authorization** 🔐
+*   **Two-Step Verification** 🔄
+*   **Profile Management** 📝
+*   **Message Notifications** 🔔
+    
 
-`NEXT_PUBLIC_API_ENDPOINT =  http://localhost:8080`
+🛠️ Technologies Used
+---------------------
 
-To run the server, you will need to add the following environment variables to your .env file inside root directory
+*   **Frontend**:
+    
+    *   [Next.js](https://nextjs.org/)
+    *   [Tailwind CSS](https://tailwindcss.com/)
+        
+*   **Backend**:
+    
+    *   [Node.js](https://nodejs.org/)
+    *   [Express](https://expressjs.com/)
+    *   [Socket.IO](https://socket.io/)
+    *   [Prisma ORM](https://www.prisma.io/)
+        
+*   **Database**:
+    
+    *   [MongoDB](https://www.mongodb.com/)
+        
 
-`PORT = 8080`
 
-`DATABASE_URL = mongodb+srv://<username>:<db_password>@<host>/chatbreeze?<options>`
+⚙️ Environment Variables
+------------------------
 
-`AUTH_EMAIL`
+To configure the application, set up the following environment variables:
 
-`AUTH_EMAIL_PASS`
+### 🔹 Frontend (Website)
 
-## Run Locally
+Create a .env file in the apps/website directory with:
 
-**Prerequisites**
+`   NEXT_PUBLIC_API_ENDPOINT=http://localhost:8080   `
 
-- Node.js (>=18.x)
-- MongoDB
-- Git
+### 🔹 Backend (Server)
 
-Clone the project
+Create a .env file in the **root** directory with:
 
-```bash
-  git clone https://github.com/Thund3rHawk/ChatBreeze.git
-```
+`   PORT=8080 `
 
-Go to the project directory
+` DATABASE_URL=mongodb+srv://:@/chatbreeze?  `
 
-```bash
-  cd ChatBreeze
-```
+`AUTH_EMAIL=  <your_email>`
 
-Install client and run with npm
+`AUTH_EMAIL_PASS= <your_auth_email_password>  `
 
-```bash
-  cd apps/website
-  npm install
-  npm run dev
-```
+Replace _<username>_, _<db_password>_, _<host>_, _<your_email>_, and _<your_auth_email_password>_ with your actual credentials.
 
-Open another terminal and install server and run with npm
+💻 Run Locally
+--------------
 
-```bash
-  npm install
-  npx prisma generate
-  npm run dev
-```
+### Prerequisites
 
-## Usage
+Ensure you have the following installed:
 
-1. **Sign up or log in:**
+*   **Node.js** (>=18.x) 🟢
+*   **MongoDB** 🍃
+*   **Git** 🔗
+    
 
-   - New users can sign up for an account.
-   - Verify their provided email id using OTP.
-   - Existing users can log in with their credentials.
+### Clone the Repository
 
-2. **Create or join chats:**
+`   git clone https://github.com/Thund3rHawk/ChatBreeze.git `
 
-   - Start a chat by searching for a user by their email.
+` cd ChatBreeze   `
 
-3. **Send messages:**
-   - Type and send messages in real-time.
-   - Receive notifications for new messages.
+### Install and Run the Backend
 
-## Contributing
+`   npm install `
 
-Contributions are always welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to contribute.
+` npx prisma generate `
 
-## License
+` npm run dev   `
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+### Install and Run the Frontend
+
+Open another terminal:
+
+`   cd apps/website `
+
+` npm install `
+
+` npm run dev   `
+
+The frontend should now be running at **http://localhost:3000.**
+
+🚀 Usage
+--------
+
+*   **Sign Up or Log In**: New users can sign up and verify their email using an OTP. Existing users can log in with their credentials.
+*   **Create or Join Chats**: Start a chat by searching for a user by their email.
+*   **Send Messages**: Type and send messages in real-time. Receive notifications for new messages.
+    
+
+🤝 Contributing
+---------------
+
+Contributions are always welcome! Please refer to the [CONTRIBUTING.md](https://github.com/Thund3rHawk/ChatBreeze/CONTRIBUTING.md) file for guidelines on how to contribute. 🚀
+
+📜 License
+----------
+
+This project is licensed under the **MIT License**. See the [LICENSE](https://github.com/Thund3rHawk/ChatBreeze/blob/main/LICENSE) file for more details. 📄
