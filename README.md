@@ -7,7 +7,6 @@ Welcome to **ChatBreeze**, a full-stack real-time chat application built with mo
 --------------------
 
 *   [🌟 Features](#-features)
-*   [🏗️ Architecture](#️-architecture)
 *   [🛠️ Technologies Used](#️-technologies-used)
 *   [⚙️ Environment Variables](#️-environment-variables)
 *   [💻 Run Locally](#-run-locally)
@@ -24,16 +23,6 @@ Welcome to **ChatBreeze**, a full-stack real-time chat application built with mo
 *   **Two-Step Verification** 🔄
 *   **Profile Management** 📝
 *   **Message Notifications** 🔔
-    
-
-🏗️ Architecture
-----------------
-
-ChatBreeze follows a **monorepo** structure, organizing both the frontend and backend within a single repository for streamlined development and deployment.
-
-*   **Frontend**: Located in the apps/website directory, the frontend is built with [Next.js](https://nextjs.org/), providing a seamless user experience with server-side rendering and efficient routing.
-*   **Backend**: The backend resides in the root directory and is powered by [Node.js](https://nodejs.org/) with [Express](https://expressjs.com/). It manages API endpoints, authentication, and real-time communication using [Socket.IO](https://socket.io/).
-*   **Database**: [MongoDB](https://www.mongodb.com/) serves as the primary database, offering scalability and flexibility for storing user data and messages.
     
 
 🛠️ Technologies Used
