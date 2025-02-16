@@ -20,7 +20,6 @@ Welcome to **ChatBreeze**, a full-stack real-time chat application built with mo
 -----------
 
 *   **Real-time Messaging** 🔥
-*   **Private and Group Chats** 👥
 *   **User Authentication and Authorization** 🔐
 *   **Two-Step Verification** 🔄
 *   **Profile Management** 📝
@@ -43,7 +42,6 @@ ChatBreeze follows a **monorepo** structure, organizing both the frontend and ba
 *   **Frontend**:
     
     *   [Next.js](https://nextjs.org/)
-    *   [React](https://reactjs.org/)
     *   [Tailwind CSS](https://tailwindcss.com/)
         
 *   **Backend**:
@@ -57,11 +55,7 @@ ChatBreeze follows a **monorepo** structure, organizing both the frontend and ba
     
     *   [MongoDB](https://www.mongodb.com/)
         
-*   **Authentication**:
-    
-    *   [JWT (JSON Web Tokens)](https://jwt.io/)
-    *   [Nodemailer](https://nodemailer.com/) for email services
-        
+
 
 ⚙️ Environment Variables
 ------------------------
@@ -84,9 +78,9 @@ Create a .env file in the **root** directory with:
 
 `AUTH_EMAIL=  <your_email>`
 
-`AUTH_EMAIL_PASS= <your_email_password>  `
+`AUTH_EMAIL_PASS= <your_auth_email_password>  `
 
-Replace _<username>_, _<db_password>_, _<host>_, _<your_email>_, and _<your_email_password>_ with your actual credentials.
+Replace _<username>_, _<db_password>_, _<host>_, _<your_email>_, and _<your_auth_email_password>_ with your actual credentials.
 
 💻 Run Locally
 --------------
@@ -143,5 +137,3 @@ Contributions are always welcome! Please refer to the [CONTRIBUTING.md](https://
 ----------
 
 This project is licensed under the **MIT License**. See the [LICENSE](https://github.com/Thund3rHawk/ChatBreeze/blob/main/LICENSE) file for more details. 📄
-
-For more information and the latest updates, visit the [ChatBreeze repository](https://github.com/Thund3rHawk/ChatBreeze).
